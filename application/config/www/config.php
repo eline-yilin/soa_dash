@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://120.24.73.33:8080/dash/index.php/';
+$config['base_url']	= 'http://120.24.73.33:8080/soa_dash/index.php/';
 
 /*
 |--------------------------------------------------------------------------
@@ -360,7 +360,7 @@ $config['proxy_ips'] = '';
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
-$config['base_theme_url']	= 'http://120.24.73.33:8080/dash/public/themes/';
+$config['base_theme_url']	= 'http://120.24.73.33:8080/soa_dash/public/themes/';
 $config['api_url']	= 'http://120.24.73.33:8080/ci/index.php/api/';
 $config['cdn_path']	=  '/var/www/ci/public/img/upload/';//'F:/workspace/ci/public/img/upload/';
 $config['api_username']	=  'dash_super';
@@ -370,14 +370,13 @@ $config['cdn_url_upload_img'] = $config['cdn_url'] . 'img/upload/';
 $config['admin_role_id'] = 1;
 $config['nav_arr'] = array(
 
-    "product" => array(
-    			'text'=>"产品管理"
+    	"price" => array(
+    			'text'=>"报价管理"
     			),
-		"store" => array(
-				'text'=>"商铺管理"
+		"template" => array(
+				'text'=>"模板管理"
 		),
 
-		"user" => array(
-				'text'=>"用户管理"
-		),
+		
 );
+

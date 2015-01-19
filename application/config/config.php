@@ -378,7 +378,5 @@ $config['nav_arr'] = array(
 				'text'=>"模板管理"
 		),
 
-		"user" => array(
-				'text'=>"用户管理"
-		),
+		
 );
