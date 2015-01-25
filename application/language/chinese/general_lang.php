@@ -30,8 +30,10 @@ $lang['createprice']			= "新建报价";
 $lang['addprice']			= "添加报价";
 $lang['product_category']			= "产品类别";
 $lang['agent_name']			= "机构名称";
-$lang['uploadimage']			= "上传图片";
-$lang['uploadimage']			= "上传图片";
+$lang['createinquiry']			= "新建inquiry";
+
+$lang['product_type_name']			= "货型名称";
+$lang['addquestion']			= "新建问题";
 $lang['uploadimage']			= "上传图片";
 $lang['uploadimage']			= "上传图片";
 $lang['uploadimage']			= "上传图片";

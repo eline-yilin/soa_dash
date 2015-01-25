@@ -35,9 +35,21 @@
             $href = isset( $nav_item['href']) ? $nav_item['href'] : $key;
             $href = $this->config->item('base_url') . $href;
            ?>
+           <?php if($key == 'template'):?>
+           		<li role="presentation" class='dropdown nav-item <?php if($router == $key) echo " active";?>' id='nav-item-<?php echo $key;?>'>
+			    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
+			      <?php echo $text;?> <span class="caret"></span>
+			    </a>
+			    <ul class="dropdown-menu" role="menu">
+			      <li><a href='inquiry'>Inquiry Partials</a></li>
+			      <li><a href='inquiry'>Quote Partials</a></li>
+			    </ul>
+			  </li>
+           <?php else:?>
            		<li class='nav-item <?php if($router == $key) echo " active";?>' id='nav-item-<?php echo $key;?>'>
            			<a href='<?php echo $href;?>'><?php echo $text;?></a>
            		</li>
+           <?php endif;?>
            <?php endforeach;?>
            		<li role="presentation" class="dropdown operation pull-right" >
            		<?php if(isset($user) && $user) :?>
