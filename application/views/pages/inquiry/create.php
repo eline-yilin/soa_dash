@@ -5,7 +5,7 @@
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
 <?php 
 $attributes = array('class' => 'product_create', 'id' => 'product_create');
-echo form_open_multipart('../product/create', $attributes);
+echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $attributes);
  ?>
 
      <input type="hidden" id='_method' name="_method" value="CREATE">

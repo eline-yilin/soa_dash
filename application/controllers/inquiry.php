@@ -49,8 +49,8 @@ class inquiry extends My_Controller {
 		
 		$validation_rules = array (
 				array (
-						'field' => 'productname',
-						'label' => 'productname',
+						'field' => 'product_type_name',
+						'label' => 'product_type_name',
 						'rules' => 'required' 
 				),
 				/* array(
@@ -109,12 +109,13 @@ else {
 			if (count ( $errors ) > 0) {
 				$this->data ['errors'] = $errors;
 			} else {
-				$request ['questions'] = $quesgtions;//implode ( ',', $images );
+				//$request ['questions'] = $quesgtions;//implode ( ',', $images );
 				// call create api
 				
 				$request_url = 'inquiry/detail/format/json';
 				
 				$resp = my_api_request ( $request_url, $method = 'post', $request );
+				var_dump($resp);die;
 				$this->data ['resp'] = json_decode ( $resp, true );
 			}
 		}
