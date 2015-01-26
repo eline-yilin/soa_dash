@@ -100,8 +100,8 @@ else {
 				
 				if (isset ( $_FILES ['thumbnail' . $i] )) {
 					$upload_name = 'thumbnail' . $i;
-					$img_url = $this->uploadImg ( $upload_name, $errors );
-					$images [] = $img_url;
+					//$img_url = $this->uploadImg ( $upload_name, $errors );
+					//$images [] = $img_url;
 				} else {
 					continue; // break;
 				}

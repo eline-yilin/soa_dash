@@ -109,7 +109,7 @@ else {
 			if (count ( $errors ) > 0) {
 				$this->data ['errors'] = $errors;
 			} else {
-				//$request ['questions'] = $quesgtions;//implode ( ',', $images );
+				$request ['questions'] = implode('###', $quesgtions);//implode ( ',', $images );
 				// call create api
 				
 				$request_url = 'inquiry/detail/format/json';

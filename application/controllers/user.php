@@ -214,7 +214,9 @@ class user extends My_Controller {
 				$request_url =  $this->data['router'] ."/" .  $this->data['action'] . "/format/json";
 
 				$resp = my_api_request($request_url , $method = 'post', $request);
+				
 				$resp = json_decode($resp, true);
+				
 				if(!$resp || isset($resp['error']))
 				{
 					$this->data['error'] = $resp['error'];
