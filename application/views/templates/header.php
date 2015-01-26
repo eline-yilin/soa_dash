@@ -41,8 +41,8 @@
 			      <?php echo $text;?> <span class="caret"></span>
 			    </a>
 			    <ul class="dropdown-menu" role="menu">
-			      <li><a href='inquiry'>Inquiry Partials</a></li>
-			      <li><a href='inquiry'>Quote Partials</a></li>
+			      <li><a href='<?php echo $this->config->item( 'base_url');?>inquiry'>Inquiry Partials</a></li>
+			      <li><a href='<?php echo $this->config->item( 'base_url');?>inquiry'>Quote Partials</a></li>
 			    </ul>
 			  </li>
            <?php else:?>

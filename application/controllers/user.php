@@ -224,7 +224,7 @@ class user extends My_Controller {
 					$this->data['resp'] = $resp;
 					$this->session->set_userdata('user', $resp);
 					$previous_url = $this->session->userdata('current_url');
-					redirect('../' . $previous_url, 'refresh');
+					redirect( $this->config->item( 'base_url') . $previous_url, 'refresh');
 					
 				}
 

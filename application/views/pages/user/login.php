@@ -5,7 +5,7 @@
 <?php if(isset($error)) var_dump($error);?>
 <?php 
 $attributes = array('class' => $router . '_' . $action , 'id' => $router . '_' . $action);
-echo form_open("../$router/$action", $attributes);
+echo form_open($this->config->item('base_url') ."$router/$action", $attributes);
  ?>
 
      <input type="hidden" id='_method' name="_method" value="CREATE">
