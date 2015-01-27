@@ -35,12 +35,12 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
           
           <!-- question-->
 			<div class="controls hidden questionRow" id="questionTemplate">
-          		 <input type="text",  class="input-xlarge"  id='question'>
+          		 <input type="text"  class="input-xlarge"  id='question'>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
          	 </div>
           <div class="controls questionRow" id='questionContainer1'>
-            <input type="text", name="question1"  class="input-xlarge"  id='question1'>
+            <input type="text" name="question1"  class="input-xlarge"  id='question1'>
             <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(1);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete') . $this->lang->line('product') ; ?> 
             </button>
@@ -48,8 +48,39 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
  		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
  					<!-- Button -->
           <div class="controls">
-            <button type='button' id='addImg' onclick="javascript:addQuestion();"  class="btn btn-success">
+            <button type='button' id='addQuest' onclick="javascript:addQuestion();"  class="btn btn-success">
             	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addquestion'); ?>
+            </button>
+          </div>
+          
+    </div>
+ 
+	</div>
+    </fieldset>
+    
+     <!-- greeting-->
+	<fieldset>
+      <div id="legend" >
+        <legend class=""><?php echo $this->lang->line('addgreeting'); ?></legend>
+    <div class="control-group   {?sizewarning} error {/sizewarning}">
+          
+          <!-- greeting-->
+			<div class="controls hidden greetingRow" id="greetingTemplate">
+          		 <input type="text"  class="input-xlarge"  id='greeting'>
+          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
+          		 <?php echo $this->lang->line('delete') . $this->lang->line('greeting')  ; ?> </button>
+         	 </div>
+          <div class="controls greetingRow" id='greetingContainer1'>
+            <input type="text" name="greeting1"  class="input-xlarge"  id='greeting1'>
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeGreeting(1);'><i class="icon-white icon-remove"></i>
+            <?php echo $this->lang->line('delete') . $this->lang->line('greeting') ; ?> 
+            </button>
+          </div>
+ 		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
+ 					<!-- Button -->
+          <div class="controls">
+            <button type='button' id='addgreeting' onclick="javascript:addGreeting();"  class="btn btn-success">
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addgreeting'); ?>
             </button>
           </div>
           
@@ -79,9 +110,9 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
             	  avail_question_index.splice(0, 1);
               }
           if(index < 10)
-          {
+          { 
 	          $("#questionTemplate").clone().removeClass('hidden').attr('id','questionContainer' +　index ).insertAfter("div.questionRow:last");
-	          $("div.imgRow:last").find('input').attr('name','question' +　index).attr('id','question' +　index );
+	          $("div.questionRow:last").find('input').attr('name','question' +　index).attr('id','question' +　index );
 	          $('#questionContainer' +　index  + ' .btn-danger').click(function(){
 					var id = $(this).parents('.questionRow').attr('id');
 					var index = id.substring(17);
@@ -93,6 +124,32 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
     	   $('#questionContainer' +　index).fadeOut().remove();
     	   avail_question_index.push (index);
        }
+
+       function addGreeting()
+       {
+         var index  = $('div.greetingRow').length;
+        
+             if(avail_greeting_index.length)
+             {
+           	  index = avail_greeting_index[0];
+           	avail_greeting_index.splice(0, 1);
+             }
+         if(index < 10)
+         { 
+	          $("#greetingTemplate").clone().removeClass('hidden').attr('id','greetingContainer' +　index ).insertAfter("div.greetingRow:last");
+	          $("div.greetingRow:last").find('input').attr('name','greeting' +　index).attr('id','greeting' +　index );
+	          $('#greetingContainer' +　index  + ' .btn-danger').click(function(){
+					var id = $(this).parents('.greetingRow').attr('id');
+					var index = id.substring(17);
+					removeGreeting(index);
+	             });
+         }
+       }
+      function removeGreeting(index){
+   	   $('#greetingContainer' +　index).fadeOut().remove();
+   	   avail_greeting_index.push (index);
+      }
+      
        var validator_messages = {
 
     	         'price': {

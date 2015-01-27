@@ -34,7 +34,7 @@ $lang['createinquiry']			= "新建inquiry";
 
 $lang['product_type_name']			= "货型名称";
 $lang['addquestion']			= "新建问题";
-$lang['uploadimage']			= "上传图片";
+$lang['addgreeting']			= "新建抬头";
 $lang['uploadimage']			= "上传图片";
 $lang['uploadimage']			= "上传图片";
 $lang['uploadimage']			= "上传图片";

@@ -21,7 +21,7 @@ class inquiry extends My_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index() {
-		$request_url = 'product/list/format/json';
+		$request_url = 'inquiry/list/format/json';
 		
 		$resp = my_api_request ( $request_url, $method = 'get', $param = array () );
 		$resp = json_decode ( $resp, true );
@@ -95,27 +95,34 @@ else {
 			//$this->load->library ( 'upload', $upload_config );
 			$errors = array ();
 			$quesgtions = array ();
+			$greetings = array ();
 			// read imgs
 			for($i = 1; $i <= 10; $i ++) {
 				
 				if (isset ( $_POST ['question' . $i] )) {
 					
 					$quesgtions [] = $_POST ['question' . $i];
-				} else {
-					continue; // break;
+				} 
+				if (isset ( $_POST ['greeting' . $i] )) {
+				
+					$greetings [] = $_POST ['greeting' . $i];
 				}
+				
 			}
+			
 			
 			if (count ( $errors ) > 0) {
 				$this->data ['errors'] = $errors;
 			} else {
 				$request ['questions'] = implode('###', $quesgtions);//implode ( ',', $images );
+				$request ['greetings'] = implode('###', $greetings);
+				
 				// call create api
 				
 				$request_url = 'inquiry/detail/format/json';
 				
 				$resp = my_api_request ( $request_url, $method = 'post', $request );
-				var_dump($resp);die;
+				//var_dump($resp);die;
 				$this->data ['resp'] = json_decode ( $resp, true );
 			}
 		}
