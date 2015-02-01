@@ -371,11 +371,12 @@ $config['admin_role_id'] = 1;
 
 $config['nav_arr'] = array(
 
-    	"price" => array(
-    			'text'=>"报价管理"
-    			),
+    	
 		"template" => array(
 				'text'=>"模板管理"
+		),
+		"price" => array(
+				'text'=>"报价管理"
 		),
 
 		

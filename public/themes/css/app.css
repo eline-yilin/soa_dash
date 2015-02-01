@@ -1,8 +1,6 @@
 @CHARSET "UTF-8";
 body
 {font-size:16px;}
-.clear{clear:both;}
-.hidden{display:none;}
 .my-circle{border-radius:50%;}
 .my-red{background:red;color:#fff;}
 .my-orange{background:#ee7337;color:#fff;}
@@ -13,31 +11,31 @@ body
 .container{width:100%;padding-left:0;padding-right:0;}
 .navbar li a
 {
-	padding:1% 2%;
+	padding:5px 10px;
 	font-size:1.2em;
+}
+.my-pills .dropdown-menu>li>a
+{
+	 background-color: #eab020 !important;
+    color: #fff;
+}
+.my-pills .dropdown-menu>li>a:hover{
+	background-color: #ee7337 !important;
+	background: #ee7337 !important;
+    color: #fff;
 }
 .navbar li a:hover,.navbar li.active a
 {
 	background-color: #ee7337 !important;
-    color: #fff;
+    color: #fff !important;
 }
-.nav-pills > li{margin:0px 1%;}
-.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
-    
-    background-color: #ee7337;
-    color: #fff;
-    -ms-transform: rotate(5deg); /* IE 9 */
-    -webkit-transform: rotate(5deg); /* Chrome, Safari, Opera */
-    transform: rotate(5deg); /* Standard syntax */
-}
+
 .nav-pills > li > a {
     border-radius: 4px;
-    color: #337ab7;
     background-color: #eab020 !important;
     color: #fff;
     
 }
-
 .nav > li > a {
     display: block;
     padding: 10px 15px;
@@ -45,6 +43,18 @@ body
     font-weight:bold;
   
 }
+
+.nav-pills > li{margin:0px 1%;}
+
+.my-navbar .nav-pills > li:hover > a, .nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    
+    background-color: #ee7337 !important;
+    color: #fff;
+    -ms-transform: rotate(5deg); /* IE 9 */
+    -webkit-transform: rotate(5deg); /* Chrome, Safari, Opera */
+    transform: rotate(5deg); /* Standard syntax */
+}
+
 .my-pills 
 {
 	border-bottom:1px solid #aaa;
@@ -65,7 +75,6 @@ body
 	position:fixed;
 	top:0px;
 }
-
 .page-content
 {
 	position:relative;
@@ -85,75 +94,9 @@ body
 .list-item {margin-top:10px;}
 .panel-body .description .row{margin:3px 0px;}
 .product-item .panel-body .img img{width:100%;}
-.controls {margin-bottom:8px;}
-.subnav{padding:5px 10px;font-size:0.8em;}
-.icon-white{
-	background-image: url("../images/glyphicons-halflings-white.png");
-	display: inline-block;
-width: 14px;
-height: 14px;
-margin-top: 1px;
-line-height: 14px;
-background-position: 14px 14px;
-background-repeat: no-repeat;
+.list-main .row{margin:8px 0px;min-height:30px;}
+.navbar li .account-operations a {
+font-size: 0.7em;
+padding: 0 !important;
 }
-.icon-user {
-background-position: -168px 0;
-}
-.icon-bar {
-    background-color: #fff;
-      border-radius: 1px;
-    display: block;
-    height: 2px;
-    width: 22px;
-    margin:0px 3px 4px;
-}
-.account-operations
-{
-	margin-top:10px;
-}
-.navbar li .account-operations a:hover{
-	background-color: transparent !important;
-	color:#428bca !important;
-	font-size:0.7em !important; 
-}
-.navbar li .account-operations a{font-size:0.7em;padding:0 !important;}
-.dropdown-ul > li > a {
-    border-radius: 4px;
-    color: #337ab7;
-    background-color: #eab020 !important;
-    color: #fff;
-    
-}
-.dropdown-menu.dropdown-ul{margin:0px;}
-.dropdown-menu.dropdown-ul  li > a:hover{
- 	background: #ee7337 !important;
-    color: #fff !important;
-}
-.icon-plus {
-    background-position: -408px -96px;
-}
-.icon-remove {
-background-position: -312px 0;
-}
-.icon-hand-right {
-background-position: -144px -144px;
-}
-
-.imgRow input[type=file] {
- display: inline-block; 
-}
-.icon-pencil {
-background-position: 0 -72px;
-}
-img.my-thumbnail{
-	width:100%;max-width:150px;
-	padding: 4px;
-margin-bottom: 20px;
-line-height: 1.42857143;
-background-color: #fff;
-border: 1px solid #ddd;
-border-radius: 4px;
--webkit-transition: all .2s ease-in-out;
-transition: all .2s ease-in-out;
-	}
+fieldset{margin-bottom:10px;}

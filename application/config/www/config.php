@@ -369,12 +369,11 @@ $config['cdn_url'] = 'http://120.24.73.33:8080/ci/public/';
 $config['cdn_url_upload_img'] = $config['cdn_url'] . 'img/upload/';
 $config['admin_role_id'] = 1;
 $config['nav_arr'] = array(
-
-    	"price" => array(
-    			'text'=>"报价管理"
-    			),
 		"template" => array(
 				'text'=>"模板管理"
+		),
+		"price" => array(
+				'text'=>"报价管理"
 		),
 
 		
