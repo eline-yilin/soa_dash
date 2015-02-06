@@ -1,47 +1,58 @@
-<h2><?php echo $title;?></h2>
+<h2><?php echo $title; var_dump($detail);?></h2>
 
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
-<?php
-if(isset($resp)) var_dump($resp);
-$attributes = array('class' => 'product_create', 'id' => 'product_create');
-echo form_open_multipart('../' . uri_string(), $attributes);
+<?php 
+$attributes = array('class' => 'inquiry_update', 'id' => 'inquiry_update');
+echo form_open_multipart($this->config->item('base_url') .'inquiry/update', $attributes);
  ?>
 
      <input type="hidden" id='_method' name="_method" value="CREATE">
 	<input type='hidden' name='postback' value='1' />
-	  <!-- Upload Image-->
-	<fieldset>
+	
+	<!-- Prod Info-->
+    <fieldset>
       <div id="legend" class="">
-        <legend class=""><?php echo $this->lang->line('uploadimage'); ?></legend>
-     <div class="control-group   {?sizewarning} error {/sizewarning}">
+        <div class="hidden"><?php echo $this->lang->line('addprice'); ?></div>
+    <div class="control-group">
+          <!-- Text input-->
+          <label class="control-label" for="product_type_name"><?php echo $this->lang->line('product_type_name'); ?></label>
+          <div class="controls">
+            <input type="text"  class="input-xlarge required" name='product_type_name'  id='product_type_name'  value="<?php echo $detail['name'];?>">
+          </div>
           
-          <!-- img-->
-			<div class="controls hidden imgRow" id="imgTemplate">
-          		 <input type="file",  class="input-xlarge"  id='thumbnail'>
+         
+    </div>
+        
+    </fieldset>
+
+      <!-- inquery-->
+	<fieldset>
+      <div id="legend" >
+        <legend class=""><?php echo $this->lang->line('addquestion'); ?></legend>
+    <div class="control-group   {?sizewarning} error {/sizewarning}">
+          
+          <!-- question-->
+			<div class="controls hidden questionRow" id="questionTemplate">
+          		 <input type="text"  class="input-xlarge"  id='question'>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
          	 </div>
-         <?php 
-         	$imgs = array();
-         	if($detail['img'])
-         	{
-         		$imgs = explode(',', $detail['img']);
-         	}
-         	foreach($imgs as $index => $img):?>
-         	 <div class="controls imgRow" id='thumbnailContainer<?php echo $index;?>'>
-           <img class='my-thumbnail' src = <?php echo $this->config->item( 'cdn_url_upload_img') .'product/' . $img; ?> />
-           <button type='button' class="btn btn-danger btn-mini" onclick='removeImage(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
-            <?php echo $this->lang->line('delete') . $this->lang->line('product') ; ?> </button>
+         	 <?php if(isset($detail['questions'])):
+         	 foreach($detail['questions'] as $index => $question):?>
+          <div class="controls questionRow" id='questionContainer<?php echo $index;?>'>
+            <input type="text" name="question<?php echo $index;?>"  class="input-xlarge"  id='question<?php echo $index;?>' value="<?php echo $question['question'];?>">
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
+            <?php echo $this->lang->line('delete') . $this->lang->line('question') ; ?> 
+            </button>
           </div>
-         <?php endforeach;?>
-          
- 		  <label class="control-label label-warning" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
+          <?php endforeach; endif;?>
+ 		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
  					<!-- Button -->
           <div class="controls">
-            <button type='button' id='addImg' onclick="javascript:addImage();"  class="btn btn-success">
-            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addImg'); ?>
+            <button type='button' id='addQuest' onclick="javascript:addQuestion();"  class="btn btn-success">
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addquestion'); ?>
             </button>
           </div>
           
@@ -49,46 +60,67 @@ echo form_open_multipart('../' . uri_string(), $attributes);
  
 	</div>
     </fieldset>
-	<!-- Prod Info-->
-    <fieldset>
-      <div id="legend" class="">
-        <legend class=""><?php echo $this->lang->line('addproduct'); ?></legend>
-    <div class="control-group">
-          <!-- Text input-->
-          <label class="control-label" for="username"><?php echo $this->lang->line('productname'); ?></label>
-           <input type="hidden"  name='removed_img' id='removed_img' />
+    
+     <!-- greeting-->
+	<fieldset>
+      <div id="legend" >
+        <legend class=""><?php echo $this->lang->line('addgreeting'); ?></legend>
+    <div class="control-group   {?sizewarning} error {/sizewarning}">
+          
+          <!-- greeting-->
+			<div class="controls hidden greetingRow" id="greetingTemplate">
+          		 <input type="text"  class="input-xlarge"  id='greeting'>
+          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
+          		 <?php echo $this->lang->line('delete') . $this->lang->line('greeting')  ; ?> </button>
+         	 </div>
+          <div class="controls greetingRow" id='greetingContainer1'>
+            <input type="text" name="greeting1"  class="input-xlarge"  id='greeting1'>
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeGreeting(1);'><i class="icon-white icon-remove"></i>
+            <?php echo $this->lang->line('delete') . $this->lang->line('greeting') ; ?> 
+            </button>
+          </div>
+ 		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
+ 					<!-- Button -->
           <div class="controls">
-            <input type="text"  class="input-xlarge required" name='productname' id='productname'  value="<?php echo $detail['name'];?>">
+            <button type='button' id='addgreeting' onclick="javascript:addGreeting();"  class="btn btn-success">
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addgreeting'); ?>
+            </button>
           </div>
-          <!-- category-->
-		  <label class="control-label hidden" for="phone"><?php echo $this->lang->line('category'); ?></label>
-          <div class="controls hidden">
-            <input type="text"  class="input-xlarge" name='category' id='category' value=''>
-          </div>
-           <!-- price-->
-		  <label class="control-label" for="price"><?php echo $this->lang->line('price'); ?></label>
-          <div class="controls">
-            <input type="text"  class="input-xlarge required" name='price' id='price' value="<?php echo $detail['price'];?>">
-          </div>
-          <!-- desc-->
-          <label class="control-label" for="phone"><?php echo $this->lang->line('description'); ?></label>
-          <div class="controls">
-            <textarea  class="input-xlarge" name='description' id='description'><?php echo $detail['description'];?></textarea>
-          </div>
-          <!-- entity-->
-          <label class="control-label"><?php echo $this->lang->line('entity'); ?></label>
-          <div class="controls">
-            <select class="input-xlarge" name='entity' id='entity'>
-              <option value=''></option>
-              <?php foreach($user['roles'] as $role):?>
-              	<?php if($role['entity_type'] == 'entity' && !$role['is_deleted']):?>
-	               <option value='<?php echo $role["entity_id"];?>'    <?php if($detail['entity_id'] == $role["entity_id"]){ echo ' selected';} ?>><?php echo $role["entity_name"];?></option>";
-	             <?php endif;?>
-             <?php endforeach;?>
-            </select>
-          </div>
+          
     </div>
-        
+ 
+	</div>
+    </fieldset>
+    
+       <!-- inquery ending-->
+	<fieldset>
+      <div id="legend" >
+        <legend class=""><?php echo $this->lang->line('addending'); ?></legend>
+    <div class="control-group">
+          
+          <!-- ending-->
+			<div class="controls hidden endingRow" id="endingTemplate">
+          		 <input type="text"  class="input-xlarge"  id='ending'>
+          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
+          		 <?php echo $this->lang->line('delete'); ?> </button>
+         	 </div>
+          <div class="controls endingRow" id='endingContainer1'>
+            <input type="text" name="ending1"  class="input-xlarge"  id='ending1'>
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeEnding(1);'><i class="icon-white icon-remove"></i>
+            <?php echo $this->lang->line('delete'); ?> 
+            </button>
+          </div>
+ 		 
+ 		  <!-- Button -->
+          <div class="controls">
+            <button type='button' id='addEnding' onclick="javascript:addAEnding();"  class="btn btn-success">
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addending'); ?>
+            </button>
+          </div>
+          
+    </div>
+ 
+	</div>
     </fieldset>
 
     <div class="control-group">
@@ -101,49 +133,83 @@ echo form_open_multipart('../' . uri_string(), $attributes);
 
 </form>
 <script>  
-       var avail_img_index = [];
-       function addImage()
+       var avail_question_index = [];
+       var avail_greeting_index = [];
+       var avail_ending_index = [];
+       function addAEnding()
+       {
+         var index  = $('div.endingRow').length;
+        
+             if(avail_ending_index.length)
+             {
+           	  index = avail_ending_index[0];
+           	  avail_ending_index.splice(0, 1);
+             }
+         if(index < 10)
+         { 
+	          $("#endingTemplate").clone().removeClass('hidden').attr('id','endingContainer' +　index ).insertAfter("div.endingRow:last");
+	          $("div.endingRow:last").find('input').attr('name','ending' +　index).attr('id','ending' +　index );
+	          $('#endingContainer' +　index  + ' .btn-danger').click(function(){
+					var id = $(this).parents('.endingRow').attr('id');
+					var index = id.substring(15);
+					removeEnding(index);
+	             });
+         }
+       }
+      function removeEnding(index){
+   	   $('#endingContainer' +　index).fadeOut().remove();
+   	   avail_ending_index.push (index);
+      }
+       function addQuestion()
         {
-          var index  = $('div.imgRow').length;
+          var index  = $('div.questionRow').length;
          
-              if(avail_img_index.length)
+              if(avail_question_index.length)
               {
-            	  index = avail_img_index[0];
-            	  avail_img_index.splice(0, 1);
+            	  index = avail_question_index[0];
+            	  avail_question_index.splice(0, 1);
               }
           if(index < 10)
-          {
-	          $("#imgTemplate").clone().removeClass('hidden').attr('id','thumbnailContainer' +　index ).insertAfter("div.imgRow:last");
-	          $("div.imgRow:last").find('input').attr('name','thumbnail' +　index).attr('id','thumbnail' +　index );
-	          $('#thumbnailContainer' +　index  + ' .btn-danger').click(function(){
-					var id = $(this).parents('.imgRow').attr('id');
-					var index = id.substring(18);
-					removeImage(index);
+          { 
+	          $("#questionTemplate").clone().removeClass('hidden').attr('id','questionContainer' +　index ).insertAfter("div.questionRow:last");
+	          $("div.questionRow:last").find('input').attr('name','question' +　index).attr('id','question' +　index );
+	          $('#questionContainer' +　index  + ' .btn-danger').click(function(){
+					var id = $(this).parents('.questionRow').attr('id');
+					var index = id.substring(17);
+					removeQuestion(index);
 	             });
           }
         }
-       function removeImage(index){
-    	  
-    	  var removed_img = $('#removed_img').val();
-    	  var remove_src = $('#thumbnailContainer' + index + ' img').attr('src');
-
-    	  var root_index = remove_src.lastIndexOf('product/') + 8;
-
-    	  remove_src = remove_src.substring(root_index);
-
-    	  if(!removed_img)
-    	  {
-    		  removed_img = remove_src;
-          }
-    	  else
-    	  {
-    		  removed_img += ',' + remove_src;
-          } 
-    	  $('#removed_img').val(removed_img);
-
-    	  $('#thumbnailContainer' +　index).fadeOut().remove();
-   	   	  avail_img_index.push (index);
+       function removeQuestion(index){
+    	   $('#questionContainer' +　index).fadeOut().remove();
+    	   avail_question_index.push (index);
        }
+
+       function addGreeting()
+       {
+         var index  = $('div.greetingRow').length;
+        
+             if(avail_greeting_index.length)
+             {
+           	  index = avail_greeting_index[0];
+           	avail_greeting_index.splice(0, 1);
+             }
+         if(index < 10)
+         { 
+	          $("#greetingTemplate").clone().removeClass('hidden').attr('id','greetingContainer' +　index ).insertAfter("div.greetingRow:last");
+	          $("div.greetingRow:last").find('input').attr('name','greeting' +　index).attr('id','greeting' +　index );
+	          $('#greetingContainer' +　index  + ' .btn-danger').click(function(){
+					var id = $(this).parents('.greetingRow').attr('id');
+					var index = id.substring(17);
+					removeGreeting(index);
+	             });
+         }
+       }
+      function removeGreeting(index){
+   	   $('#greetingContainer' +　index).fadeOut().remove();
+   	   avail_greeting_index.push (index);
+      }
+      
        var validator_messages = {
 
     	         'price': {

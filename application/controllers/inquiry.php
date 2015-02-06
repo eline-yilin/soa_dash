@@ -135,15 +135,15 @@ else {
 		$this->load->view ( 'templates/footer' );
 	}
 	public function update($id_name, $id_val) {
-		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( 'product' );
+		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( 'inquiry' );
 		
 		$this->load->helper ( 'form' );
 		$this->load->library ( 'form_validation' );
-		
-		$request_url = 'product/detail/id/' . $id_val . '/format/json';
+	
+		$request_url = 'inquiry/detail/id/' . $id_val . '/format/json';
 		
 		$detail = my_api_request ( $request_url, $method = 'get', $param = array () );
-		
+		//$detail = array('name'=>'abc');
 		// $this->data = array();
 		// $this->data = my_api_request
 		$this->data ['detail'] = json_decode ( $detail, true );
@@ -221,7 +221,7 @@ else {
 				
 				$this->data ['resp'] = json_decode ( $resp, true );
 			}
-			var_dump ( $request );
+			var_dump ( $resp );
 			die ();
 		}
 		
