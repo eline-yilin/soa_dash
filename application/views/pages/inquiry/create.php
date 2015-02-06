@@ -88,6 +88,38 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
  
 	</div>
     </fieldset>
+    
+       <!-- inquery ending-->
+	<fieldset>
+      <div id="legend" >
+        <legend class=""><?php echo $this->lang->line('addending'); ?></legend>
+    <div class="control-group">
+          
+          <!-- ending-->
+			<div class="controls hidden endingRow" id="endingTemplate">
+          		 <input type="text"  class="input-xlarge"  id='ending'>
+          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
+          		 <?php echo $this->lang->line('delete'); ?> </button>
+         	 </div>
+          <div class="controls endingRow" id='endingContainer1'>
+            <input type="text" name="ending1"  class="input-xlarge"  id='ending1'>
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeEnding(1);'><i class="icon-white icon-remove"></i>
+            <?php echo $this->lang->line('delete'); ?> 
+            </button>
+          </div>
+ 		 
+ 		  <!-- Button -->
+          <div class="controls">
+            <button type='button' id='addEnding' onclick="javascript:addAEnding();"  class="btn btn-success">
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addending'); ?>
+            </button>
+          </div>
+          
+    </div>
+ 
+	</div>
+    </fieldset>
+
     <div class="control-group">
           <!-- Button -->
           <div class="controls">
@@ -100,6 +132,31 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
 <script>  
        var avail_question_index = [];
        var avail_greeting_index = [];
+       var avail_ending_index = [];
+       function addAEnding()
+       {
+         var index  = $('div.endingRow').length;
+        
+             if(avail_ending_index.length)
+             {
+           	  index = avail_ending_index[0];
+           	  avail_ending_index.splice(0, 1);
+             }
+         if(index < 10)
+         { 
+	          $("#endingTemplate").clone().removeClass('hidden').attr('id','endingContainer' +　index ).insertAfter("div.endingRow:last");
+	          $("div.endingRow:last").find('input').attr('name','ending' +　index).attr('id','ending' +　index );
+	          $('#endingContainer' +　index  + ' .btn-danger').click(function(){
+					var id = $(this).parents('.endingRow').attr('id');
+					var index = id.substring(15);
+					removeEnding(index);
+	             });
+         }
+       }
+      function removeEnding(index){
+   	   $('#endingContainer' +　index).fadeOut().remove();
+   	   avail_ending_index.push (index);
+      }
        function addQuestion()
         {
           var index  = $('div.questionRow').length;

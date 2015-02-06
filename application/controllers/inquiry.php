@@ -96,6 +96,7 @@ else {
 			$errors = array ();
 			$quesgtions = array ();
 			$greetings = array ();
+			$endings = array ();
 			// read imgs
 			for($i = 1; $i <= 10; $i ++) {
 				
@@ -107,6 +108,10 @@ else {
 				
 					$greetings [] = $_POST ['greeting' . $i];
 				}
+				if (isset ( $_POST ['ending' . $i] )) {
+				
+					$endings [] = $_POST ['ending' . $i];
+				}
 				
 			}
 			
@@ -116,11 +121,11 @@ else {
 			} else {
 				$request ['questions'] = implode('###', $quesgtions);//implode ( ',', $images );
 				$request ['greetings'] = implode('###', $greetings);
-				
+				$request ['endings'] = implode('###', $endings);
 				// call create api
 				
 				$request_url = 'inquiry/detail/format/json';
-				
+
 				$resp = my_api_request ( $request_url, $method = 'post', $request );
 				//var_dump($resp);die;
 				$this->data ['resp'] = json_decode ( $resp, true );
