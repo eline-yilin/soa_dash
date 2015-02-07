@@ -1,11 +1,11 @@
-<h2><?php echo $title; var_dump($detail);?></h2>
+<h2><?php echo $title;?></h2>
 
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
 <?php 
 $attributes = array('class' => 'inquiry_update', 'id' => 'inquiry_update');
-echo form_open_multipart($this->config->item('base_url') .'inquiry/update', $attributes);
+echo form_open_multipart('../' . uri_string(), $attributes);
  ?>
 
      <input type="hidden" id='_method' name="_method" value="CREATE">
@@ -40,7 +40,7 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/update', $att
           		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
          	 </div>
          	 <?php if(isset($detail['questions'])):
-         	 foreach($detail['questions'] as $index => $question):?>
+         	 foreach($detail['questions'] as $index => $question):  $index = $index + 1;?>
           <div class="controls questionRow" id='questionContainer<?php echo $index;?>'>
             <input type="text" name="question<?php echo $index;?>"  class="input-xlarge"  id='question<?php echo $index;?>' value="<?php echo $question['question'];?>">
             <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
@@ -73,12 +73,15 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/update', $att
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('greeting')  ; ?> </button>
          	 </div>
-          <div class="controls greetingRow" id='greetingContainer1'>
-            <input type="text" name="greeting1"  class="input-xlarge"  id='greeting1'>
-            <button type='button' class="btn btn-danger btn-mini" onclick='removeGreeting(1);'><i class="icon-white icon-remove"></i>
+         	  <?php if(isset($detail['greetings'])):
+         	 foreach($detail['greetings'] as $index => $greeting):  $index = $index + 1;?>
+          <div class="controls greetingRow" id='greetingContainer<?php echo $index;?>'>
+            <input type="text" name="greeting<?php echo $index;?>"  class="input-xlarge"  id='greeting<?php echo $index;?>' value="<?php echo $greeting['content'];?>">
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeGreeting(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete') . $this->lang->line('greeting') ; ?> 
             </button>
           </div>
+           <?php endforeach; endif;?>
  		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
  					<!-- Button -->
           <div class="controls">
@@ -104,13 +107,15 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/update', $att
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete'); ?> </button>
          	 </div>
+         	   <?php if(isset($detail['endings'])):
+         	 foreach($detail['endings'] as $index => $ending): $index = $index + 1;?>
           <div class="controls endingRow" id='endingContainer1'>
             <input type="text" name="ending1"  class="input-xlarge"  id='ending1'>
             <button type='button' class="btn btn-danger btn-mini" onclick='removeEnding(1);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete'); ?> 
             </button>
           </div>
- 		 
+ 		 <?php endforeach; endif;?>
  		  <!-- Button -->
           <div class="controls">
             <button type='button' id='addEnding' onclick="javascript:addAEnding();"  class="btn btn-success">

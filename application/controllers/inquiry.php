@@ -150,8 +150,8 @@ else {
 		
 		$validation_rules = array (
 				array (
-						'field' => 'productname',
-						'label' => 'productname',
+						'field' => 'product_type_name',
+						'label' => 'product_type_name',
 						'rules' => 'required' 
 				),
 				/* array(
@@ -174,55 +174,53 @@ else {
 		if ($this->form_validation->run () === FALSE) {
 		} 		// process upload
 		else {
+
 			// product entity
 			$request = array (
-					'id' => $id_val,
-					'name' => $this->input->post ( 'productname' ),
-					'category_id' => $this->input->post ( 'category' ),
-					'price' => $this->input->post ( 'price' ),
-					'description' => $this->input->post ( 'description' ),
-					'entity_id' => $this->input->post ( 'entity' ) 
-			)
-			// ''=>$this->input->post(''),
-			;
+					'name' => $this->input->post ( 'product_type_name' ),
+					'id' => $id_val
+					
+			);
 			
-			// init upload lib
-			$upload_config ['upload_path'] = $this->config->item ( 'cdn_path' ) . 'product/';
-			$upload_config ['allowed_types'] = 'gif|jpg|png|jpeg';
-			$upload_config ['remove_spaces'] = TRUE;
-			$upload_config ['max_size'] = '1000';
-			$upload_config ['max_width'] = '1024';
-			$upload_config ['max_height'] = '768';
-			
-			$this->load->library ( 'upload', $upload_config );
 			$errors = array ();
-			$images = array ();
+			$quesgtions = array ();
+			$greetings = array ();
+			$endings = array ();
 			// read imgs
-			for($i = 1; $i < 0; $i ++) {
-				
-				if (isset ( $_FILES ['thumbnail' . $i] )) {
-					$upload_name = 'thumbnail' . $i;
-					$img_url = $this->uploadImg ( $upload_name, $errors );
-					$images [] = $img_url;
-				} else {
-					continue; // break;
-				}
-			}
+			for($i = 1; $i <= 10; $i ++) {
 			
+				if (isset ( $_POST ['question' . $i] )) {
+						
+					$quesgtions [] = $_POST ['question' . $i];
+				}
+				if (isset ( $_POST ['greeting' . $i] )) {
+			
+					$greetings [] = $_POST ['greeting' . $i];
+				}
+				if (isset ( $_POST ['ending' . $i] )) {
+			
+					$endings [] = $_POST ['ending' . $i];
+				}
+			
+			}
+				
+				
 			if (count ( $errors ) > 0) {
 				$this->data ['errors'] = $errors;
 			} else {
-				
-				$request ['img'] = implode ( ',', $images );
+				$request ['questions'] = implode('###', $quesgtions);//implode ( ',', $images );
+				$request ['greetings'] = implode('###', $greetings);
+				$request ['endings'] = implode('###', $endings);
 				// call create api
-				$request_url = 'product/detail/id/' . $id_val . '/format/json';
-				
+			
+				$request_url = 'inquiry/detail/format/json';
+			
 				$resp = my_api_request ( $request_url, $method = 'put', $request );
-				
+				//var_dump($resp);die;
 				$this->data ['resp'] = json_decode ( $resp, true );
+			
 			}
-			var_dump ( $resp );
-			die ();
+				
 		}
 		
 		$this->load->view ( "pages/" . $this->data ['router'] . "/" . $this->data ['action'], $this->data );
