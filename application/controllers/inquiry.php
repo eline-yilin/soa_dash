@@ -216,7 +216,7 @@ else {
 				$request_url = 'inquiry/detail/format/json';
 			
 				$resp = my_api_request ( $request_url, $method = 'put', $request );
-				//var_dump($resp);die;
+				
 				$this->data ['resp'] = json_decode ( $resp, true );
 			
 			}

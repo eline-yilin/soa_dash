@@ -109,9 +109,9 @@ echo form_open_multipart('../' . uri_string(), $attributes);
          	 </div>
          	   <?php if(isset($detail['endings'])):
          	 foreach($detail['endings'] as $index => $ending): $index = $index + 1;?>
-          <div class="controls endingRow" id='endingContainer1'>
-            <input type="text" name="ending1"  class="input-xlarge"  id='ending1'>
-            <button type='button' class="btn btn-danger btn-mini" onclick='removeEnding(1);'><i class="icon-white icon-remove"></i>
+          <div class="controls endingRow" id='endingContainer<?php echo $index;?>'>
+            <input type="text" name="ending<?php echo $index;?>"  class="input-xlarge"  id='ending<?php echo $index;?>' value="<?php echo $ending['content'];?>">
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeEnding(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete'); ?> 
             </button>
           </div>
