@@ -27,39 +27,6 @@ echo form_open_multipart('../' . uri_string(), $attributes);
         
     </fieldset>
 
-      <!-- inquery-->
-	<fieldset>
-      <div id="legend" >
-        <legend class=""><?php echo $this->lang->line('addquestion'); ?></legend>
-    <div class="control-group   {?sizewarning} error {/sizewarning}">
-          
-          <!-- question-->
-			<div class="controls hidden questionRow" id="questionTemplate">
-          		 <input type="text"  class="input-xlarge"  id='question'>
-          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
-          		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
-         	 </div>
-         	 <?php if(isset($detail['questions'])):
-         	 foreach($detail['questions'] as $index => $question):  $index = $index + 1;?>
-          <div class="controls questionRow" id='questionContainer<?php echo $index;?>'>
-            <input type="text" name="question<?php echo $index;?>"  class="input-xlarge"  id='question<?php echo $index;?>' value="<?php echo $question['question'];?>">
-            <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
-            <?php echo $this->lang->line('delete') . $this->lang->line('question') ; ?> 
-            </button>
-          </div>
-          <?php endforeach; endif;?>
- 		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
- 					<!-- Button -->
-          <div class="controls">
-            <button type='button' id='addQuest' onclick="javascript:addQuestion();"  class="btn btn-success">
-            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addquestion'); ?>
-            </button>
-          </div>
-          
-    </div>
- 
-	</div>
-    </fieldset>
     
      <!-- greeting-->
 	<fieldset>
@@ -87,6 +54,40 @@ echo form_open_multipart('../' . uri_string(), $attributes);
           <div class="controls">
             <button type='button' id='addgreeting' onclick="javascript:addGreeting();"  class="btn btn-success">
             	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addgreeting'); ?>
+            </button>
+          </div>
+          
+    </div>
+ 
+	</div>
+    </fieldset>
+    
+      <!-- inquery-->
+	<fieldset>
+      <div id="legend" >
+        <legend class=""><?php echo $this->lang->line('addquestion'); ?></legend>
+    <div class="control-group   {?sizewarning} error {/sizewarning}">
+          
+          <!-- question-->
+			<div class="controls hidden questionRow" id="questionTemplate">
+          		 <input type="text"  class="input-xlarge"  id='question'>
+          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
+          		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
+         	 </div>
+         	 <?php if(isset($detail['questions'])):
+         	 foreach($detail['questions'] as $index => $question):  $index = $index + 1;?>
+          <div class="controls questionRow" id='questionContainer<?php echo $index;?>'>
+            <input type="text" name="question<?php echo $index;?>"  class="input-xlarge"  id='question<?php echo $index;?>' value="<?php echo $question['question'];?>">
+            <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
+            <?php echo $this->lang->line('delete') . $this->lang->line('question') ; ?> 
+            </button>
+          </div>
+          <?php endforeach; endif;?>
+ 		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
+ 					<!-- Button -->
+          <div class="controls">
+            <button type='button' id='addQuest' onclick="javascript:addQuestion();"  class="btn btn-success">
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('addquestion'); ?>
             </button>
           </div>
           
