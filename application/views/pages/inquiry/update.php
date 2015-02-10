@@ -1,5 +1,6 @@
 <style>
 .control-group .controls{margin-bottom:5px;}
+.control-group .controls input{min-width:50%;}
 </style>
 <?php if(isset($resp) && $resp == 'true'):?>
 <script>
