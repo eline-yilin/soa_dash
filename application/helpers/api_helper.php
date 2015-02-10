@@ -24,6 +24,7 @@ if ( ! function_exists('my_api_request'))
 		if(!isset($param['user_id'])){
 			$param['user_id'] = $user_id;
 		}
+		
 		switch ($method){
 			case 'get':
 				if(http_build_query($param))

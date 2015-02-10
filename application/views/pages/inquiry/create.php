@@ -1,3 +1,12 @@
+<style>
+.control-group .controls{margin-bottom:5px;}
+</style>
+<?php if(isset($resp) && is_numeric($resp) &&  $resp >= 0):?>
+<script>
+alert('sucessfully created');
+setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url');?>inquiry";}, 1000);
+</script>
+<?php endif;?>
 <h2><?php echo $title;?></h2>
 
 <?php echo validation_errors(); ?>
@@ -40,12 +49,18 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
           		 <input type="text"  class="input-xlarge"  id='greeting'>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('greeting')  ; ?> </button>
+         	 	 <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.greetingRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         		 <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.greetingRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
          	 </div>
           <div class="controls greetingRow" id='greetingContainer1'>
             <input type="text" name="greeting1"  class="input-xlarge"  id='greeting1'>
             <button type='button' class="btn btn-danger btn-mini" onclick='removeGreeting(1);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete') . $this->lang->line('greeting') ; ?> 
             </button>
+            <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.greetingRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         	<button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.greetingRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
           </div>
  		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
  					<!-- Button -->
@@ -71,12 +86,18 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
           		 <input type="text"  class="input-xlarge"  id='question'>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
+          		  <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.questionRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         		  <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.questionRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
          	 </div>
           <div class="controls questionRow" id='questionContainer1'>
             <input type="text" name="question1"  class="input-xlarge"  id='question1'>
             <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(1);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete') . $this->lang->line('product') ; ?> 
             </button>
+             <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.questionRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         	<button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.questionRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
           </div>
  		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
  					<!-- Button -->
@@ -101,12 +122,18 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
           		 <input type="text"  class="input-xlarge"  id='ending'>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete'); ?> </button>
+          		 <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.endingRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         		 <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.endingRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
          	 </div>
           <div class="controls endingRow" id='endingContainer1'>
             <input type="text" name="ending1"  class="input-xlarge"  id='ending1'>
             <button type='button' class="btn btn-danger btn-mini" onclick='removeEnding(1);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete'); ?> 
             </button>
+            <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.endingRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         	<button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.endingRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
           </div>
  		 
  		  <!-- Button -->

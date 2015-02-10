@@ -19,6 +19,9 @@
 				    	</div>
 				    	<div class=" col-md-2 col-sm-2 col-xs-2 ">
 						    		<a href = 'inquiry/update/id/<?php echo $item['id'] ;?>'  class="btn btn-success btn-mini"><i class="icon-white icon-pencil"></i> <?php echo $this->lang->line('edit') ; ?> </a>  	
+				    	 			<button type='button' class="btn btn-danger btn-mini" onclick="javascript:removeItem(<?php echo $item['id'];?>);"><i class="icon-white icon-remove"></i>
+          		 						<?php echo $this->lang->line('delete') ; ?> 
+          		 					</button>
 				    	</div>
 				    </div>
 				</div>
@@ -27,3 +30,17 @@
 	       <?php endforeach;}?>
 	    </div>
     </div>
+<script>
+	    function removeItem(id){
+
+		    $.ajax({
+				url: "ajax",
+				type: "POST",
+				data: { 'url':'inquiry/detail/id/' + id + '/format/json' ,
+					'method': 'delete'},
+				dataType: "json"
+				}).done(function(data){
+					alert(JSON.stringify(data));
+					});
+	    }
+</script>

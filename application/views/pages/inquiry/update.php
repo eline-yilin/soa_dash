@@ -1,4 +1,13 @@
-<h2><?php echo $title;?></h2>
+<style>
+.control-group .controls{margin-bottom:5px;}
+</style>
+<?php if(isset($resp) && $resp == 'true'):?>
+<script>
+alert('sucessfully updated');
+setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url');?>inquiry";}, 1000);
+</script>
+<?php endif;?>
+<h2><?php echo $title; ?></h2>
 
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
@@ -39,6 +48,9 @@ echo form_open_multipart('../' . uri_string(), $attributes);
           		 <input type="text"  class="input-xlarge"  id='greeting'>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('greeting')  ; ?> </button>
+          		  <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.greetingRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         		  <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.greetingRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
          	 </div>
          	  <?php if(isset($detail['greetings'])):
          	 foreach($detail['greetings'] as $index => $greeting):  $index = $index + 1;?>
@@ -47,6 +59,8 @@ echo form_open_multipart('../' . uri_string(), $attributes);
             <button type='button' class="btn btn-danger btn-mini" onclick='removeGreeting(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete') . $this->lang->line('greeting') ; ?> 
             </button>
+            <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.greetingRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         	<button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.greetingRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
           </div>
            <?php endforeach; endif;?>
  		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
@@ -73,6 +87,9 @@ echo form_open_multipart('../' . uri_string(), $attributes);
           		 <input type="text"  class="input-xlarge"  id='question'>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('product')  ; ?> </button>
+          		 <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.questionRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         		  <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.questionRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
          	 </div>
          	 <?php if(isset($detail['questions'])):
          	 foreach($detail['questions'] as $index => $question):  $index = $index + 1;?>
@@ -81,6 +98,9 @@ echo form_open_multipart('../' . uri_string(), $attributes);
             <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete') . $this->lang->line('question') ; ?> 
             </button>
+            <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.questionRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         	<button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.questionRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
           </div>
           <?php endforeach; endif;?>
  		  <label class="control-label label-warning hidden" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
@@ -107,6 +127,9 @@ echo form_open_multipart('../' . uri_string(), $attributes);
           		 <input type="text"  class="input-xlarge"  id='ending'>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete'); ?> </button>
+          		 <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.endingRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         		 <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.endingRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
          	 </div>
          	   <?php if(isset($detail['endings'])):
          	 foreach($detail['endings'] as $index => $ending): $index = $index + 1;?>
@@ -115,6 +138,9 @@ echo form_open_multipart('../' . uri_string(), $attributes);
             <button type='button' class="btn btn-danger btn-mini" onclick='removeEnding(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete'); ?> 
             </button>
+            <button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.endingRow','up')"><i class="icon-white icon-arrow-up"></i>up</button>
+         	<button type='button' class="btn btn-success btn-large" onclick="javascript:move(this,'.endingRow','down')"><i class="icon-white icon-arrow-down"></i>down</button>
+        
           </div>
  		 <?php endforeach; endif;?>
  		  <!-- Button -->
@@ -142,6 +168,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
        var avail_question_index = [];
        var avail_greeting_index = [];
        var avail_ending_index = [];
+     
        function addAEnding()
        {
          var index  = $('div.endingRow').length;

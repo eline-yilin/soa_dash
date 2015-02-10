@@ -1,5 +1,26 @@
 var current_page = default_page = 'bussiness';
 
+function move(ele,selector,dir){
+    var target;
+    var me = $(ele).parents(selector);
+   
+    if(dir == 'up')
+    {
+ 	   target = me.prev(selector + ':visible').find('input');
+        }
+    else{
+ 	   target = me.next(selector + ':visible').find('input');
+    }
+    if(!target.length)
+    {  
+        return;
+    }
+   var target_val = target.val();
+   var my_val = me.find('input').val();
+   me.find('input').val(target_val);
+   target.val(my_val);
+}
+
 $(document).ready(function(){
 	
 	var current_page = getHash() || default_page;

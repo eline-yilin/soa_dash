@@ -45,7 +45,7 @@ class user extends My_Controller {
 	}
 	public function logout()
 	{
-		$this->session->unset_userdata('user');
+		$this->session->unset_userdata('dash_user');
 		redirect('../welcome', 'refresh');
 	}
 	public function create()
@@ -224,8 +224,8 @@ class user extends My_Controller {
 				}
 				else{
 					$this->data['resp'] = $resp;
-					$this->session->set_userdata('user', $resp);
-					$previous_url = $this->session->userdata('current_url');
+					$this->session->set_userdata('dash_user', $resp);
+					$previous_url = $this->session->userdata('dash_current_url');
 					redirect( $this->config->item( 'base_url') . $previous_url, 'refresh');
 					
 				}
@@ -304,7 +304,7 @@ class user extends My_Controller {
 			else{
 				
 				$this->data['resp'] = $resp;
-				$this->session->set_userdata('user', $resp);
+				$this->session->set_userdata('dash_user', $resp);
 				redirect('../welcome', 'refresh');
 					
 			}
