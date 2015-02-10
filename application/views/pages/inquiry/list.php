@@ -40,7 +40,9 @@
 					'method': 'delete'},
 				dataType: "json"
 				}).done(function(data){
-					alert(JSON.stringify(data));
+					if(data)
+					{
+						}
 					});
 	    }
 </script>
