@@ -32,7 +32,11 @@
     </div>
 <script>
 	    function removeItem(id){
-
+			var yes = confirm("Are you sure you want to delete?");
+			if(!yes)
+			{
+ 				return false;
+			}
 		    $.ajax({
 				url: "ajax",
 				type: "POST",
