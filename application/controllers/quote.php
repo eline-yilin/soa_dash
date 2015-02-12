@@ -42,7 +42,7 @@ class quote extends My_Controller {
 		$this->load->view ( 'templates/footer', $this->data );
 	}
 	public function create() {
-		$this->data ['title'] = $this->lang->line ( 'createinquiry' );
+		$this->data ['title'] = $this->lang->line ( 'create' ) . $this->lang->line ( 'quote' );
 		
 		$this->load->helper ( 'form' );
 		$this->load->library ( 'form_validation' );
@@ -75,7 +75,7 @@ class quote extends My_Controller {
 else {
 			// product entity
 			$request = array (
-					'name' => $this->input->post ( 'product_type_name' ),
+					'name' => $this->input->post ( 'agent' ),
 					//'category_id' => $this->input->post ( 'category' ),
 					//'price' => $this->input->post ( 'price' ),
 					//'description' => $this->input->post ( 'description' ),
@@ -94,24 +94,21 @@ else {
 			
 			//$this->load->library ( 'upload', $upload_config );
 			$errors = array ();
-			$quesgtions = array ();
-			$greetings = array ();
-			$endings = array ();
+			$clients = array ();
+			$client_contents = array ();
+			
 			// read imgs
 			for($i = 1; $i <= 10; $i ++) {
 				
-				if (isset ( $_POST ['question' . $i] )) {
+				if (isset ( $_POST ['client' . $i] )) {
 					
-					$quesgtions [] = $_POST ['question' . $i];
+					$quesgtions [] = $_POST ['client' . $i];
 				} 
-				if (isset ( $_POST ['greeting' . $i] )) {
+				if (isset ( $_POST ['client_content' . $i] )) {
 				
-					$greetings [] = $_POST ['greeting' . $i];
+					$client_contents [] = $_POST ['client_content' . $i];
 				}
-				if (isset ( $_POST ['ending' . $i] )) {
 				
-					$endings [] = $_POST ['ending' . $i];
-				}
 				
 			}
 			
@@ -119,9 +116,9 @@ else {
 			if (count ( $errors ) > 0) {
 				$this->data ['errors'] = $errors;
 			} else {
-				$request ['questions'] = implode('###', $quesgtions);//implode ( ',', $images );
-				$request ['greetings'] = implode('###', $greetings);
-				$request ['endings'] = implode('###', $endings);
+				$request ['clients'] = implode('###', $quesgtions);//implode ( ',', $images );
+				$request ['client_contents'] = implode('###', $greetings);
+				
 				// call create api
 				
 				$request_url = 'inquiry/detail/format/json';
