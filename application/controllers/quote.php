@@ -121,7 +121,7 @@ else {
 				
 				// call create api
 				
-				$request_url = 'inquiry/detail/format/json';
+				$request_url = 'quote/detail/format/json';
 
 				$resp = my_api_request ( $request_url, $method = 'post', $request );
 				//var_dump($resp);die;
