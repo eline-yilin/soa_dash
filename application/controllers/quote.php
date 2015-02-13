@@ -21,8 +21,8 @@ class quote extends My_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index() {
-		$request_url = 'inquiry/list/format/json';
-		
+		$request_url = $this->data ['router'] . '/list/format/json';
+
 		$resp = my_api_request ( $request_url, $method = 'get', $param = array () );
 		$resp = json_decode ( $resp, true );
 		if (isset ( $resp ['error'] )) {
@@ -38,7 +38,7 @@ class quote extends My_Controller {
 		}
 		
 		$this->load->view ( 'templates/header', $this->data );
-		$this->load->view ( 'pages/quote/list', $this->data );
+		$this->load->view ( 'pages/' . $this->data ['router'] . '/list', $this->data );
 		$this->load->view ( 'templates/footer', $this->data );
 	}
 	public function create() {
@@ -49,8 +49,8 @@ class quote extends My_Controller {
 		
 		$validation_rules = array (
 				array (
-						'field' => 'product_type_name',
-						'label' => 'product_type_name',
+						'field' => 'agent',
+						'label' => 'agent',
 						'rules' => 'required' 
 				),
 				/* array(
@@ -102,7 +102,7 @@ else {
 				
 				if (isset ( $_POST ['client' . $i] )) {
 					
-					$quesgtions [] = $_POST ['client' . $i];
+					$clients [] = $_POST ['client' . $i];
 				} 
 				if (isset ( $_POST ['client_content' . $i] )) {
 				
@@ -116,13 +116,13 @@ else {
 			if (count ( $errors ) > 0) {
 				$this->data ['errors'] = $errors;
 			} else {
-				$request ['clients'] = implode('###', $quesgtions);//implode ( ',', $images );
-				$request ['client_contents'] = implode('###', $greetings);
+				$request ['clients'] = implode('###', $clients);//implode ( ',', $images );
+				$request ['client_contents'] = implode('###', $client_contents);
 				
 				// call create api
 				
 				$request_url = 'quote/detail/format/json';
-
+				//var_dump($request);die;
 				$resp = my_api_request ( $request_url, $method = 'post', $request );
 				//var_dump($resp);die;
 				$this->data ['resp'] = json_decode ( $resp, true );

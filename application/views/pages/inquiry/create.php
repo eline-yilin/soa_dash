@@ -14,7 +14,7 @@ setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'b
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
 <?php 
-$attributes = array('class' => 'product_create', 'id' => 'product_create');
+$attributes = array('class' => 'product_create', 'id' => 'inquiry_create');
 echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $attributes);
  ?>
 

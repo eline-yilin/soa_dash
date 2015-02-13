@@ -19,7 +19,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
           <!-- Text input-->
           <label class="control-label" for="agent"><?php echo $this->lang->line("agent"); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge required" name='"agent"' id='"agent"'  value=''>
+            <input type="text"  class="input-xlarge required" name='agent' id='agent'  value=''>
           </div>
           
          
@@ -37,7 +37,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 			<div class="controls hidden questionRow" id="questionTemplate">
           		<label class="control-label" for="client"><?php echo $this->lang->line('client_name'); ?></label>
 		          <div class="controls">
-		            <input type="text"  class="input-xlarge required" name='agent' id='agent'  value=''>
+		            <input type="text"  class="input-xlarge required" name='client' id='client'  value=''>
 		          </div>
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
@@ -50,7 +50,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
           <div class="controls questionRow" id='questionContainer1'>
            <label class="control-label" for="client"><?php echo $this->lang->line('client_name'); ?></label>
 		          <div class="controls">
-		            <input type="text"  class="input-xlarge required" name='agent1' id='agent1'  value=''>
+		            <input type="text"  class="input-xlarge required" name='client1' id='client1'  value=''>
 		          </div>
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
@@ -100,8 +100,10 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
           if(index < 10)
           { 
 	          $("#questionTemplate").clone().removeClass('hidden').attr('id','questionContainer' +　index ).insertAfter("div.questionRow:last");
-	          $("div.questionRow:last").find('input').attr('name','question' +　index).attr('id','question' +　index );
-	          $('#questionContainer' +　index  + ' .btn-danger').click(function(){
+	          $("div.questionRow:last").find('input').attr('name','client' +　index).attr('id','client' +　index );
+	          $("div.questionRow:last").find('textarea').attr('name','client_content' +　index).attr('id','client_content' +　index );
+	          
+		      $('#questionContainer' +　index  + ' .btn-danger').click(function(){
 					var id = $(this).parents('.questionRow').attr('id');
 					var index = id.substring(17);
 					removeQuestion(index);
@@ -158,7 +160,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
        $(document).ready(function(){ 
     	   var add_validator = jQuery('#<?php echo $router . "_" . $action;?>').validate({
 
-    	         ignore: "",
+    		   	ignore:":not(:visible)",
 
     	         onkeyup: false,//function(element) {},
 

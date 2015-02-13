@@ -3,6 +3,7 @@ body
 {font-size:16px;}
 .my-circle{border-radius:50%;}
 .my-red{background:red;color:#fff;}
+.my-error{color:red;}
 .my-orange{background:#ee7337;color:#fff;}
 .my-blue{background:#337ab7;color:#fff;}
 .center{margin:0px auto;text-align:center;}
