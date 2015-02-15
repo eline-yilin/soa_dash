@@ -132,14 +132,15 @@ else {
 		$this->load->view ( 'templates/footer' );
 	}
 	public function update($id_name, $id_val) {
-		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( 'inquiry' );
+		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( 'quote' );
 		
 		$this->load->helper ( 'form' );
 		$this->load->library ( 'form_validation' );
 	
-		$request_url = 'inquiry/detail/id/' . $id_val . '/format/json';
+		$request_url =  $this->data ['router'] . '/detail/id/' . $id_val . '/format/json';
 		
 		$detail = my_api_request ( $request_url, $method = 'get', $param = array () );
+		
 		//$detail = array('name'=>'abc');
 		// $this->data = array();
 		// $this->data = my_api_request
@@ -147,8 +148,8 @@ else {
 		
 		$validation_rules = array (
 				array (
-						'field' => 'product_type_name',
-						'label' => 'product_type_name',
+						'field' => 'agent',
+						'label' => 'agent',
 						'rules' => 'required' 
 				),
 				/* array(
@@ -174,46 +175,42 @@ else {
 
 			// product entity
 			$request = array (
-					'name' => $this->input->post ( 'product_type_name' ),
+					'name' => $this->input->post ( 'agent' ),
 					'id' => $id_val
 					
 			);
 			
 			$errors = array ();
-			$quesgtions = array ();
-			$greetings = array ();
-			$endings = array ();
+			$clients = array ();
+			$client_contents = array ();
+			
 			// read imgs
 			for($i = 1; $i <= 10; $i ++) {
-			
-				if (isset ( $_POST ['question' . $i] )) {
+					
+					if (isset ( $_POST ['client' . $i] )) {
 						
-					$quesgtions [] = $_POST ['question' . $i];
+						$clients [] = $_POST ['client' . $i];
+					} 
+					if (isset ( $_POST ['client_content' . $i] )) {
+					
+						$client_contents [] = $_POST ['client_content' . $i];
+					}
+					
+					
 				}
-				if (isset ( $_POST ['greeting' . $i] )) {
-			
-					$greetings [] = $_POST ['greeting' . $i];
-				}
-				if (isset ( $_POST ['ending' . $i] )) {
-			
-					$endings [] = $_POST ['ending' . $i];
-				}
-			
-			}
 				
 				
 			if (count ( $errors ) > 0) {
 				$this->data ['errors'] = $errors;
 			} else {
-				$request ['questions'] = implode('###', $quesgtions);//implode ( ',', $images );
-				$request ['greetings'] = implode('###', $greetings);
-				$request ['endings'] = implode('###', $endings);
+				$request ['clients'] = implode('###', $clients);//implode ( ',', $images );
+				$request ['client_contents'] = implode('###', $client_contents);
 				// call create api
 			
-				$request_url = 'inquiry/detail/format/json';
+				$request_url = $this->data ['router'] . '/detail/format/json';
 			
 				$resp = my_api_request ( $request_url, $method = 'put', $request );
-				
+				var_dump($resp);die;
 				$this->data ['resp'] = json_decode ( $resp, true );
 			
 			}

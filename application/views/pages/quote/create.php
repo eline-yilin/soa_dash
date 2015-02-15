@@ -1,3 +1,7 @@
+<style>
+.questionRow{padding:10px;border:1px solid #e5e5e5; margin:5px 0px;}
+</style>
+
 <h2><?php echo $title;?></h2>
 
 <?php echo validation_errors(); ?>
