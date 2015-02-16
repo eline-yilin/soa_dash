@@ -45,8 +45,8 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 		          </div>
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
-		            <textarea  class="input-xlarge required" name='client_content' id='client_content' >
-		            </textarea>
+		           <textarea row=1    class="hand input-xlarge required" name='client_content' id='client_content'  value='' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
+		         	</textarea>
 		          </div>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') ; ?> </button>
@@ -58,9 +58,8 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 		          </div>
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
-		           <input type="text"  class="hand input-xlarge required" name='client_content1' id='client_content1'  value='' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
-		         
-		            </textarea>
+		           <textarea row=1  class="hand input-xlarge required" name='client_content1' id='client_content1'  value='' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
+		         	</textarea>
 		          </div>
             <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(1);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete')  ; ?> 
@@ -95,6 +94,8 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
        function editContent(ele){
     	   var id = $(ele).parents('.questionRow').attr('id');
 			var index = id.substring(17);
+			var content = $('#client_content' + index).val();
+			$('#template-content').val(content);
 			$("#template_content").modal('show');
 			function returnID(){return index;}
 			$('#ok-content').unbind('click').click(function(){
@@ -103,9 +104,10 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 				});
        }
        function putContent(id){
-alert(id);
-var content = $('#template-content').val();
-$('#client_content' + id).val(content);
+		//alert(id);
+		var content = $('#template-content').val();
+		 $('#template-content').val('');
+		$('#client_content' + id).val(content);
            }
       
        function addQuestion()
@@ -120,8 +122,8 @@ $('#client_content' + id).val(content);
           if(index < 10)
           { 
 	          $("#questionTemplate").clone().removeClass('hidden').attr('id','questionContainer' +　index ).insertAfter("div.questionRow:last");
-	          $("div.questionRow:last").find('input').attr('name','client' +　index).attr('id','client' +　index );
-	          $("div.questionRow:last").find('textarea').attr('name','client_content' +　index).attr('id','client_content' +　index );
+	          $("div.questionRow:last").find('input#client').attr('name','client' +　index).attr('id','client' +　index );
+	          $("div.questionRow:last").find('textarea#client_content').attr('name','client_content' +　index).attr('id','client_content' +　index );
 	          
 		      $('#questionContainer' +　index  + ' .btn-danger').click(function(){
 					var id = $(this).parents('.questionRow').attr('id');
