@@ -101,3 +101,4 @@ font-size: 0.7em;
 padding: 0 !important;
 }
 fieldset{margin-bottom:10px;}
+.hand:hover{cursor:pointer;cursor:hand;}
