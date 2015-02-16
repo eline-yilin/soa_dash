@@ -46,7 +46,8 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
 		           <textarea row=1    class="hand input-xlarge required" name='client_content' id='client_content'  value='' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
-		         	</textarea>
+			         click to edit
+			         </textarea>
 		          </div>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') ; ?> </button>
@@ -59,6 +60,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
 		           <textarea row=1  class="hand input-xlarge required" name='client_content1' id='client_content1'  value='' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
+		         	click to edit
 		         	</textarea>
 		          </div>
             <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(1);'><i class="icon-white icon-remove"></i>
@@ -133,6 +135,9 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
           }
         }
        function removeQuestion(index){
+    	   var conf = confirm("<?php echo  $this->lang->line('confirm_delete');?>");
+           if(!conf)
+               return false;
     	   $('#questionContainer' +　index).fadeOut().remove();
     	   avail_question_index.push (index);
        }
@@ -219,23 +224,23 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
         </script>
         
         <div id="template_content" class="autoModal modal fade">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Content</h4>
-            </div>
-            <div class="modal-body">
-              
-               <textarea id='template-content' style='height:90%;width:100%;max-width:100%;'></textarea>
-              
-            </div>
-            <div class="modal-footer">
-            
-            	<button type="button" id='ok-content' class="btn btn-default" data-dismiss="modal">Ok</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">Content</h4>
+		            </div>
+		            <div class="modal-body">
+		              
+		               <textarea id='template-content' style='height:90%;width:100%;max-width:100%;'></textarea>
+		              
+		            </div>
+		            <div class="modal-footer">
+		            
+		            	<button type="button" id='ok-content' class="btn btn-default" data-dismiss="modal">Ok</button>
+		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
         

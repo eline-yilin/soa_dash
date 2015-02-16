@@ -45,7 +45,8 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 		          </div>
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
-		            <textarea  class="input-xlarge required" name='client_content' id='client_content' >
+		            <textarea  class="hand input-xlarge required" name='client_content' id='client_content' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
+		           	click to edit
 		            </textarea>
 		          </div>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
@@ -59,7 +60,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 		          </div>
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
-		            <textarea  class="input-xlarge required" name='client_content<?php echo $index;?>' id='client_content<?php echo $index;?>' >
+		            <textarea  class="hand input-xlarge required" name='client_content<?php echo $index;?>' id='client_content<?php echo $index;?>' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
 		             <?php echo $client['content'];?>
 		            </textarea>
 		          </div>
@@ -92,7 +93,25 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 </form>
 <script>  
        var avail_question_index = [];
-      
+
+       function editContent(ele){
+    	   var id = $(ele).parents('.questionRow').attr('id');
+			var index = id.substring(17);
+			var content = $('#client_content' + index).val();
+			$('#template-content').val(content);
+			$("#template_content").modal('show');
+			function returnID(){return index;}
+			$('#ok-content').unbind('click').click(function(){
+				var id = returnID();
+				 putContent(id);
+				});
+       }
+       function putContent(id){
+		//alert(id);
+		var content = $('#template-content').val();
+		 $('#template-content').val('');
+		$('#client_content' + id).val(content);
+           }
       
        function addQuestion()
         {
@@ -117,6 +136,9 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
           }
         }
        function removeQuestion(index){
+           var conf = confirm("<?php echo  $this->lang->line('confirm_delete');?>");
+           if(!conf)
+               return false;
     	   $('#questionContainer' +　index).fadeOut().remove();
     	   avail_question_index.push (index);
        }
@@ -190,6 +212,33 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 
     	     });
 
+    	   $('#template_content').on('show.bs.modal', function () {
+        	   
+          	    $('.modal .modal-body').css('overflow-y', 'auto'); 
+          	    $('.modal .modal-body').css('max-height', $(window).height() *0.7);
+          	 	$('.modal .modal-body').css('height', $(window).height() *0.7);
+          	 	
+          	});
        
            });
         </script>
+         <div id="template_content" class="autoModal modal fade">
+		    <div class="modal-dialog">
+		        <div class="modal-content">
+		            <div class="modal-header">
+		                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		                <h4 class="modal-title">Content</h4>
+		            </div>
+		            <div class="modal-body">
+		              
+		               <textarea id='template-content' style='height:90%;width:100%;max-width:100%;'></textarea>
+		              
+		            </div>
+		            <div class="modal-footer">
+		            
+		            	<button type="button" id='ok-content' class="btn btn-default" data-dismiss="modal">Ok</button>
+		                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>

@@ -183,6 +183,9 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
          }
        }
       function removeEnding(index){
+    	  var conf = confirm("<?php echo  $this->lang->line('confirm_delete');?>");
+          if(!conf)
+              return false;
    	   $('#endingContainer' +　index).fadeOut().remove();
    	   avail_ending_index.push (index);
       }
@@ -207,6 +210,9 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
           }
         }
        function removeQuestion(index){
+    	   var conf = confirm("<?php echo  $this->lang->line('confirm_delete');?>");
+           if(!conf)
+               return false;
     	   $('#questionContainer' +　index).fadeOut().remove();
     	   avail_question_index.push (index);
        }
@@ -232,6 +238,9 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
          }
        }
       function removeGreeting(index){
+    	  var conf = confirm("<?php echo  $this->lang->line('confirm_delete');?>");
+          if(!conf)
+              return false;
    	   $('#greetingContainer' +　index).fadeOut().remove();
    	   avail_greeting_index.push (index);
       }
