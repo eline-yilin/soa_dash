@@ -45,9 +45,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 		          </div>
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
-		            <textarea  class="hand input-xlarge required" name='client_content' id='client_content' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
-		           	click to edit
-		            </textarea>
+		            <textarea  rows="1"  class="hand input-xlarge required" name='client_content' id='client_content' readonly placeholder="click to edit" onclick="javascript: editContent(this)"></textarea>
 		          </div>
           		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') ; ?> </button>
@@ -60,9 +58,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 		          </div>
           		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
-		            <textarea  class="hand input-xlarge required" name='client_content<?php echo $index;?>' id='client_content<?php echo $index;?>' readonly placeholder="click to edit" onclick="javascript: editContent(this)">
-		             <?php echo $client['content'];?>
-		            </textarea>
+		            <textarea   rows="1" class="hand input-xlarge required" name='client_content<?php echo $index;?>' id='client_content<?php echo $index;?>' readonly placeholder="click to edit" onclick="javascript: editContent(this)"><?php echo $client['content'];?></textarea>
 		          </div>
             <button type='button' class="btn btn-danger btn-mini" onclick='removeQuestion(<?php echo $index;?>);'><i class="icon-white icon-remove"></i>
             <?php echo $this->lang->line('delete')  ; ?> 
