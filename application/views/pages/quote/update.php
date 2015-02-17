@@ -8,8 +8,8 @@
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
 <?php 
-$attributes = array('class' => 'product_create', 'id' => 'quote_create');
-echo form_open_multipart($this->config->item('base_url') .'quote/create', $attributes);
+$attributes = array('class' => 'product_create', 'id' => $router . '_' . $action);
+echo form_open_multipart('../' . uri_string(), $attributes);
  ?>
 
      <input type="hidden" id='_method' name="_method" value="CREATE">

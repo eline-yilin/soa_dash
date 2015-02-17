@@ -210,7 +210,7 @@ else {
 				$request_url = $this->data ['router'] . '/detail/format/json';
 			
 				$resp = my_api_request ( $request_url, $method = 'put', $request );
-				var_dump($resp);die;
+				
 				$this->data ['resp'] = json_decode ( $resp, true );
 			
 			}
