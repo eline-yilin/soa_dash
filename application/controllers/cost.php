@@ -148,8 +148,8 @@ else {
 		
 		$validation_rules = array (
 				array (
-						'field' => 'agent',
-						'label' => 'agent',
+						'field' => 'awb',
+						'label' => 'awb',
 						'rules' => 'required' 
 				),
 				/* array(
@@ -175,7 +175,7 @@ else {
 
 			// product entity
 			$request = array (
-					'name' => $this->input->post ( 'agent' ),
+					'name' => $this->input->post ( 'awb' ),
 					'id' => $id_val
 					
 			);

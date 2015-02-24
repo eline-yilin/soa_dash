@@ -1,7 +1,7 @@
 <?php  if(isset($resp) && $resp == 'true'):?>
 <script>
 alert('sucessfully updated');
-setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url');?>quote";}, 1000);
+setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url') , $router;?>";}, 1000);
 </script>
 <?php endif;?>
 <style>
@@ -14,7 +14,7 @@ setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'b
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
 <?php 
-$attributes = array('class' => 'product_create', 'id' => $router . '_' . $action);
+$attributes = array('class' => $router . '_' . $action, 'id' => $router . '_' . $action);
 echo form_open_multipart('../' . uri_string(), $attributes);
  ?>
 
