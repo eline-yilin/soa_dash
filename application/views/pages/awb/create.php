@@ -1,7 +1,7 @@
 <?php if(isset($resp) && is_numeric($resp) &&  $resp >= 0):?>
 <script>
 alert('sucessfully created');
-setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url') . $router;?>";}, 1000);
+setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url') , $router;?>";}, 1000);
 </script>
 <?php endif;?>
 
