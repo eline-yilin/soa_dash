@@ -1,4 +1,4 @@
-<?php if(isset($resp) && $resp == 'true'):?>
+<?php  if(isset($resp) && $resp == 'true'):?>
 <script>
 alert('sucessfully updated');
 setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url');?>quote";}, 1000);
@@ -29,7 +29,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
           <!-- Text input-->
           <label class="control-label" for="awb"><?php echo $this->lang->line("site"); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge required" name='awb' id='awb'  value="<?php echo $detail['awb']?>">
+            <input type="text"  class="input-xlarge required" name='awb' id='awb'  value="<?php echo $detail['site']?>">
           </div>
           
          

@@ -132,7 +132,7 @@ else {
 		$this->load->view ( 'templates/footer' );
 	}
 	public function update($id_name, $id_val) {
-		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( 'quote' );
+		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( $this->data['router']);
 		
 		$this->load->helper ( 'form' );
 		$this->load->library ( 'form_validation' );
