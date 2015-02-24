@@ -50,7 +50,10 @@ $lang['awb']			= "awb";
 $lang['site']			= "站点";
 $lang['vendor']			= "vendor";
 $lang['vendor_name']			= "vendor名称";
+$lang['cost']			= "vendor cost";
 $lang['uploadimage']			= "上传图片";
-
+$lang['uploadimage']			= "上传图片";
+$lang['uploadimage']			= "上传图片";
+$lang['uploadimage']			= "上传图片";
 /* End of file calendar_lang.php */
 /* Location: ./system/language/english/calendar_lang.php */
