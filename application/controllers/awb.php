@@ -42,15 +42,15 @@ class awb extends My_Controller {
 		$this->load->view ( 'templates/footer', $this->data );
 	}
 	public function create() {
-		$this->data ['title'] = $this->lang->line ( 'create' ) . $this->lang->line ( 'quote' );
+		$this->data ['title'] = $this->lang->line ( 'create' ) . $this->lang->line ( $this->data ['router'] );
 		
 		$this->load->helper ( 'form' );
 		$this->load->library ( 'form_validation' );
 		
 		$validation_rules = array (
 				array (
-						'field' => 'agent',
-						'label' => 'agent',
+						'field' => 'awb',
+						'label' => 'awb',
 						'rules' => 'required' 
 				),
 				/* array(
@@ -75,7 +75,7 @@ class awb extends My_Controller {
 else {
 			// product entity
 			$request = array (
-					'name' => $this->input->post ( 'agent' ),
+					'name' => $this->input->post ( 'awb' ),
 					//'category_id' => $this->input->post ( 'category' ),
 					//'price' => $this->input->post ( 'price' ),
 					//'description' => $this->input->post ( 'description' ),
@@ -121,7 +121,7 @@ else {
 				
 				// call create api
 				
-				$request_url = 'quote/detail/format/json';
+				$request_url = $this->data['router'] . '/detail/format/json';
 				//var_dump($request);die;
 				$resp = my_api_request ( $request_url, $method = 'post', $request );
 				//var_dump($resp);die;

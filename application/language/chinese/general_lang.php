@@ -46,11 +46,10 @@ $lang['add']			= "添加";
 $lang['client']			= "client";
 $lang['content']			= "内容";
 $lang['confirm_delete']			= "确定删除?";
-$lang['uploadimage']			= "上传图片";
-$lang['uploadimage']			= "上传图片";
-$lang['uploadimage']			= "上传图片";
-$lang['uploadimage']			= "上传图片";
-$lang['uploadimage']			= "上传图片";
+$lang['awb']			= "awb";
+$lang['site']			= "站点";
+$lang['vendor']			= "vendor";
+$lang['vendor_name']			= "vendor名称";
 $lang['uploadimage']			= "上传图片";
 
 /* End of file calendar_lang.php */

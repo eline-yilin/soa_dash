@@ -27,9 +27,9 @@ echo form_open_multipart('../' . uri_string(), $attributes);
        
     <div class="control-group">
           <!-- Text input-->
-          <label class="control-label" for="agent"><?php echo $this->lang->line("agent"); ?></label>
+          <label class="control-label" for="awb"><?php echo $this->lang->line("site"); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge required" name='agent' id='agent'  value="<?php echo $detail['agent']?>">
+            <input type="text"  class="input-xlarge required" name='awb' id='awb'  value="<?php echo $detail['awb']?>">
           </div>
           
          
@@ -40,16 +40,16 @@ echo form_open_multipart('../' . uri_string(), $attributes);
       <!-- inquery-->
 	<fieldset>
       <div id="legend" >
-        <legend class=""><?php echo $this->lang->line('add'), $this->lang->line('client') ; ?></legend>
+        <legend class=""><?php echo $this->lang->line('add'), $this->lang->line('vendor') ; ?></legend>
     <div class="control-group   {?sizewarning} error {/sizewarning}">
           
           <!-- question-->
 			<div class="controls hidden questionRow" id="questionTemplate">
-          		<label class="control-label" for="client"><?php echo $this->lang->line('client_name'); ?></label>
+          		<label class="control-label" for="client"><?php echo $this->lang->line('vendor_name'); ?></label>
 		          <div class="controls">
 		            <input type="text"  class="input-xlarge required" name='client' id='client'  value="">
 		          </div>
-          		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
+          		<label class="control-label" for="client"><?php echo $this->lang->line('vendor'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
 		            <textarea  rows="5"  class="hand input-xlarge required" name='client_content' id='client_content' readonly placeholder="click to edit" onclick="javascript: editContent(this)"></textarea>
 		          </div>
@@ -58,11 +58,11 @@ echo form_open_multipart('../' . uri_string(), $attributes);
          	 </div>
          <?php foreach($detail['clients'] as $index => $client):$index++;$arr = explode("\n",$client['content']); $line_num = count($arr); if($line_num > 5) $line_num = 5;?>
           <div class="controls questionRow" id='questionContainer<?php echo $index;?>'>
-           <label class="control-label" for="client"><?php echo $this->lang->line('client_name'); ?></label>
+           <label class="control-label" for="client"><?php echo $this->lang->line('vendor_name'); ?></label>
 		          <div class="controls">
 		            <input type="text"  class="input-xlarge required" name='client<?php echo $index;?>' id='client<?php echo $index;?>'  value="<?php echo $client['name'];?>">
 		          </div>
-          		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
+          		<label class="control-label" for="client"><?php echo $this->lang->line('vendor'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
 		            <textarea   rows="<?php echo $line_num;?>" class="hand input-xlarge required" name='client_content<?php echo $index;?>' id='client_content<?php echo $index;?>' readonly placeholder="click to edit" onclick="javascript: editContent(this)"><?php echo $client['content'];?></textarea>
 		          </div>
@@ -74,7 +74,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
  		 <!-- Button -->
           <div class="controls">
             <button type='button' id='addQuest' onclick="javascript:addQuestion();"  class="btn btn-success">
-            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add') , $this->lang->line('client'); ?>
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add') , $this->lang->line('vendor'); ?>
             </button>
           </div>
           

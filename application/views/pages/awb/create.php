@@ -1,7 +1,7 @@
 <?php if(isset($resp) && is_numeric($resp) &&  $resp >= 0):?>
 <script>
 alert('sucessfully created');
-setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url');?>quote";}, 1000);
+setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url') . $router;?>";}, 1000);
 </script>
 <?php endif;?>
 
@@ -15,8 +15,8 @@ setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'b
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
 <?php 
-$attributes = array('class' => 'product_create', 'id' => 'quote_create');
-echo form_open_multipart($this->config->item('base_url') .'quote/create', $attributes);
+$attributes = array('class' => $router. '_' . $action, 'id' => $router. '_' . $action);
+echo form_open_multipart($this->config->item('base_url') . $router . '/' . $action, $attributes);
  ?>
 
      <input type="hidden" id='_method' name="_method" value="CREATE">
@@ -28,9 +28,9 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
        
     <div class="control-group">
           <!-- Text input-->
-          <label class="control-label" for="agent"><?php echo $this->lang->line("agent"); ?></label>
+          <label class="control-label" for="awb"><?php echo $this->lang->line("site"); ?></label>
           <div class="controls">
-            <input type="text"  class="input-xlarge required" name='agent' id='agent'  value=''>
+            <input type="text"  class="input-xlarge required" name='awb' id='awb'  value=''>
           </div>
           
          
@@ -41,16 +41,16 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
       <!-- inquery-->
 	<fieldset>
       <div id="legend" >
-        <legend class=""><?php echo $this->lang->line('add'), $this->lang->line('client') ; ?></legend>
+        <legend class=""><?php echo $this->lang->line('add'), $this->lang->line('vendor') ; ?></legend>
     <div class="control-group   {?sizewarning} error {/sizewarning}">
           
           <!-- question-->
 			<div class="controls hidden questionRow" id="questionTemplate">
-          		<label class="control-label" for="client"><?php echo $this->lang->line('client_name'); ?></label>
+          		<label class="control-label" for="client"><?php echo $this->lang->line('vendor_name'); ?></label>
 		          <div class="controls">
 		            <input type="text"  class="input-xlarge required" name='client' id='client'  value=''>
 		          </div>
-          		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
+          		<label class="control-label" for="client"><?php echo $this->lang->line('vendor'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
 		           <textarea rows="5"    class="hand input-xlarge required" name='client_content' id='client_content'  value='' readonly placeholder="click to edit" onclick="javascript: editContent(this)"></textarea>
 		          </div>
@@ -58,11 +58,11 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
           		 <?php echo $this->lang->line('delete') ; ?> </button>
          	 </div>
           <div class="controls questionRow" id='questionContainer1'>
-           <label class="control-label" for="client"><?php echo $this->lang->line('client_name'); ?></label>
+           <label class="control-label" for="client"><?php echo $this->lang->line('vendor_name'); ?></label>
 		          <div class="controls">
 		            <input type="text"  class="input-xlarge required" name='client1' id='client1'  value=''>
 		          </div>
-          		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
+          		<label class="control-label" for="client"><?php echo $this->lang->line('vendor'),$this->lang->line('content') ; ?></label>
 		          <div class="controls">
 		           <textarea rows="5"  class="hand input-xlarge required" name='client_content1' id='client_content1'  value='' readonly placeholder="click to edit" onclick="javascript: editContent(this)"></textarea>
 		          </div>
@@ -74,7 +74,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
  					<!-- Button -->
           <div class="controls">
             <button type='button' id='addQuest' onclick="javascript:addQuestion();"  class="btn btn-success">
-            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add') , $this->lang->line('client'); ?>
+            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add') , $this->lang->line('vendor'); ?>
             </button>
           </div>
           
