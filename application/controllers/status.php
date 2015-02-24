@@ -135,12 +135,12 @@ else {
 		$this->load->view ( 'templates/footer' );
 	}
 	public function update($id_name, $id_val) {
-		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( 'inquiry' );
+		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( $this->data['router'] );
 		
 		$this->load->helper ( 'form' );
 		$this->load->library ( 'form_validation' );
 	
-		$request_url = 'inquiry/detail/id/' . $id_val . '/format/json';
+		$request_url = $this->data['router'] . '/detail/id/' . $id_val . '/format/json';
 		
 		$detail = my_api_request ( $request_url, $method = 'get', $param = array () );
 		//$detail = array('name'=>'abc');
@@ -213,7 +213,7 @@ else {
 				$request ['endings'] = implode('###', $endings);
 				// call create api
 			
-				$request_url = 'inquiry/detail/format/json';
+				$request_url = $this->data['router'] . '/detail/format/json';
 			
 				$resp = my_api_request ( $request_url, $method = 'put', $request );
 				

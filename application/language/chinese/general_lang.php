@@ -52,7 +52,7 @@ $lang['vendor']			= "vendor";
 $lang['vendor_name']			= "vendor名称";
 $lang['cost']			= "vendor cost";
 $lang['status']			= "status";
-$lang['uploadimage']			= "上传图片";
+$lang['status_name']			= "status名称";
 $lang['uploadimage']			= "上传图片";
 $lang['uploadimage']			= "上传图片";
 /* End of file calendar_lang.php */

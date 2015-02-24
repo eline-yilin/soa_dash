@@ -22,7 +22,7 @@ echo form_open_multipart($this->config->item('base_url') . $router . '/' . $acti
       <div id="legend" class="">
     <div class="control-group">
           <!-- Text input-->
-          <label class="control-label" for="product_type_name"><?php echo $this->lang->line('product_type_name'); ?></label>
+          <label class="control-label" for="product_type_name"><?php echo $this->lang->line('status_name')   ; ?></label>
           <div class="controls">
             <input type="text"  class="input-xlarge required" name='product_type_name' id='product_type_name'  value=''>
           </div>
