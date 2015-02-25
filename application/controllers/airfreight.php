@@ -2,7 +2,7 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 require APPPATH . '/libraries/My_Controller.php';
-class resource extends My_Controller {
+class airfreight extends My_Controller {
 	
 	/**
 	 * Index Page for this controller.
@@ -21,7 +21,8 @@ class resource extends My_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index() {
-		$request_url = 'quote/list/format/json';
+		$router = $this->data['router'];
+		$request_url = $router . '/list/format/json';
 		
 		$resp = my_api_request ( $request_url, $method = 'get', $param = array () );
 		$resp = json_decode ( $resp, true );
@@ -38,7 +39,7 @@ class resource extends My_Controller {
 		}
 		
 		$this->load->view ( 'templates/header', $this->data );
-		$this->load->view ( 'pages/quote/list', $this->data );
+		$this->load->view ( 'pages/' . $router . '/list', $this->data );
 		$this->load->view ( 'templates/footer', $this->data );
 	}
 	public function create() {
@@ -107,6 +108,7 @@ else {
 				//$this->data ['resp'] = json_decode ( $resp, true );
 			}
 		}
+		$this->load->view ( 'templates/header' );
 		$this->load->view ( "pages/" . $router . "/" . $this->data ['action'], $this->data );
 		$this->load->view ( 'templates/footer' );
 	}
