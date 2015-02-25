@@ -1,7 +1,7 @@
 <?php if(isset($resp) && $resp == 'true'):?>
 <script>
 alert('sucessfully updated');
-setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url');?>inquiry";}, 1000);
+setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'base_url'),$router;?>";}, 1000);
 </script>
 <?php endif;?>
 <h2><?php echo $title; ?></h2>
