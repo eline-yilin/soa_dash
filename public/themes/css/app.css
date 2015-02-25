@@ -104,3 +104,8 @@ fieldset{margin-bottom:10px;}
 .hand:hover{cursor:pointer;cursor:hand;}
 .control-group .controls{margin-bottom:5px;}
 .control-group .controls input, .control-group .controls textarea{min-width:50%;}
+}
+.imgRow{margin-bottom:10px;}
+.imgRow input[type=file] {
+ display: inline-block; 
+}

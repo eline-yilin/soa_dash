@@ -9,157 +9,191 @@ setTimeout(function(){window.location.href = "<?php echo $this->config->item( 'b
 <?php echo validation_errors(); ?>
 <?php if(isset($error)) var_dump($error);?>
 <?php //if(isset($upload_data)) var_dump($upload_data);?>
-<?php 
-$attributes = array('class' => $router. '_' . $action, 'id' => $router. '_' . $action);
-echo form_open_multipart($this->config->item('base_url') . $router . '/' . $action, $attributes);
- ?>
+<?php
 
-     <input type="hidden" id='_method' name="_method" value="CREATE">
-	<input type='hidden' name='postback' value='1' />
-	
-	<!-- Prod Info-->
-    <fieldset>
-      <div id="legend" class="">
-    <div class="control-group">
-          <!-- Text input-->
-          <label class="control-label" for="product_type_name"><?php echo $this->lang->line('airfreight_name')   ; ?></label>
-          <div class="controls">
-            <input type="text"  class="input-xlarge required" name='product_type_name' id='product_type_name'  value=''>
-          </div> 
-    </div>
-        
-    </fieldset>
+$attributes = array (
+		'class' => $router . '_' . $action,
+		'id' => $router . '_' . $action 
+);
+echo form_open_multipart ( $this->config->item ( 'base_url' ) . $router . '/' . $action, $attributes );
+?>
 
-    
-    
-     <!-- location-->
-	<fieldset>
-      <div id="legend" >
-        <legend class=""><?php echo $this->lang->line('add'),$this->lang->line('site'); ?></legend>
-    <div class="control-group   {?sizewarning} error {/sizewarning}">
-          
-          <!-- greeting-->
+<input type="hidden" id='_method' name="_method" value="CREATE">
+<input type='hidden' name='postback' value='1' />
+
+<!-- Prod Info-->
+<fieldset>
+	<div id="legend" class="">
+		<div class="control-group">
+			<!-- Text input-->
+			<label class="control-label" for="product_type_name"><?php echo $this->lang->line('airfreight_name')   ; ?></label>
+			<div class="controls">
+				<input type="text" class="input-xlarge required"
+					name='product_type_name' id='product_type_name' value=''>
+			</div>
+		</div>
+
+</fieldset>
+
+
+
+<!-- location-->
+<fieldset>
+	<div id="legend">
+		<legend class=""><?php echo $this->lang->line('add'),$this->lang->line('site'); ?></legend>
+		<div class="control-group">
+
+			<!-- greeting-->
 			<div class="controls hidden locationRow" id="locationTemplate">
-          		 <input type="text"  class="input-xlarge"  id='location'>
-          		  <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
-		            <?php echo $this->lang->line('delete') . $this->lang->line('site') ; ?> 
-		           </button>
-         	 </div>
-         	 <div class="controls hidden imgRow" id="imgTemplate">
-          		 <input type="file",  class="input-xlarge"  id='thumbnail'>
-          		 <button type='button' class="btn btn-danger btn-mini"><i class="icon-white icon-remove"></i>
+				<div class='panel panel-warning'>
+					<div class='panel-body'>
+						<input type="text" name="location" class="input-xlarge"
+							'>
+						<button type='button' class="btn btn-danger btn-mini">
+							<i class="icon-white icon-remove"></i>
+	            				<?php echo $this->lang->line('delete') . $this->lang->line('site') ; ?> 
+           				</button>
+           				<div class='panel panel-warning'>
+								<div class='panel-body'>
+									<div class="row control-group">
+										<h4><?php echo $this->lang->line('upload'),$this->lang->line('file'); ?></h4>
+										<div class="control-group   ">
+											<!-- img-->
+											<div class="controls imgRow" >
+												<input type="file" ,  class="input-xlarge">
+												<button type='button' class="btn btn-danger btn-mini">
+													<i class="icon-white icon-remove"></i>
+							            <?php echo $this->lang->line('delete') . $this->lang->line('file') ; ?> 
+							            </button>
+											</div>
+											<!-- Button -->
+											<div class="controls">
+												<button type='button' class="addImg btn btn-success">
+													<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add'),$this->lang->line('file'); ?>
+							            </button>
+											</div>
+	
+										</div>
+									</div>
+								</div>
+						</div><!-- end images -->
+
+					</div>
+				</div>
+			
+			</div>
+			<div class="controls hidden imgRow" id="imgTemplate">
+				<input type="file" ,  class="input-xlarge" id='thumbnail'>
+				<button type='button' class="btn btn-danger btn-mini">
+					<i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('file')  ; ?> </button>
-         	 </div>
-          <div class="controls locationRow" id='locationContainer1'>
-            <input type="text" name="location1"  class="input-xlarge"  id='location1'>
-            <button type='button' class="btn btn-danger btn-mini" onclick='removeLocation(1);'><i class="icon-white icon-remove"></i>
-            <?php echo $this->lang->line('delete') . $this->lang->line('site') ; ?> 
+			</div>
+
+
+			<div class="controls locationRow" id='locationContainer1'>
+				<div class='panel panel-warning'>
+					<div class='panel-body'>
+						<input type="text" name="location1" class="input-xlarge"
+							id='location1'>
+						<button type='button' class="btn btn-danger btn-mini"
+							onclick='removeLocation(1);'>
+							<i class="icon-white icon-remove"></i>
+	            				<?php echo $this->lang->line('delete') . $this->lang->line('site') ; ?> 
+           				</button>
+           				<div class='panel panel-warning'>
+								<div class='panel-body'>
+									<div class="row control-group">
+										<h4><?php echo $this->lang->line('upload'),$this->lang->line('file'); ?></h4>
+										<div class="control-group   ">
+											<!-- img-->
+											<div class="controls imgRow" id='thumbnailContainer1_1'>
+												<input type="file" , name="thumbnail1_1" class="input-xlarge"
+													id='thumbnail1_1'>
+												<button type='button' class="btn btn-danger btn-mini"
+													onclick='removeImage(1,1);'>
+													<i class="icon-white icon-remove"></i>
+							            <?php echo $this->lang->line('delete') . $this->lang->line('file') ; ?> 
+							            </button>
+											</div>
+											<!-- Button -->
+											<div class="controls">
+												<button type='button' 
+													onclick="javascript:addImage(1);" class="addImg btn btn-success">
+													<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add'),$this->lang->line('file'); ?>
+							            </button>
+											</div>
+	
+										</div>
+									</div>
+								</div>
+						</div><!-- end images -->
+
+					</div>
+				</div>
+
+			</div>
+			<!-- Button -->
+			<div class="controls">
+				<button type='button' id='addlocation'
+					onclick="javascript:addLocation();" class="btn btn-success">
+					<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add'), $this->lang->line('site'); ?>
             </button>
-            <fieldset>
-      <div id="legend" class="">
-        <legend class=""><?php echo $this->lang->line('upload'),$this->lang->line('file'); ?></legend>
-    <div class="control-group   ">     
-          <!-- img-->		
-          <div class="controls imgRow" id='thumbnailContainer1'>
-            <input type="file", name="thumbnail1"  class="input-xlarge"  id='thumbnail1'>
-            <button type='button' class="btn btn-danger btn-mini" onclick='removeImage(1);'><i class="icon-white icon-remove"></i>
-            <?php echo $this->lang->line('delete') . $this->lang->line('product') ; ?> 
-            </button>
-          </div>
- 		  <label class="control-label label-warning" for="thumbnail1" style='margin-top:5px;padding:3px;'><?php echo $this->lang->line('imgsizelimit'); ?></label>
- 					<!-- Button -->
-          <div class="controls">
-            <button type='button' id='addImg' onclick="javascript:addImage();"  class="btn btn-success">
-            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add'),$this->lang->line('file'); ?>
-            </button>
-          </div>
-          
-    </div>
- 
+			</div>
+
+		</div>
+
 	</div>
-    </fieldset>
-           
-          </div>
- 		 <!-- Button -->
-          <div class="controls">
-            <button type='button' id='addlocation' onclick="javascript:addLocation();"  class="btn btn-success">
-            	<i class="icon-white icon-plus"></i><?php echo $this->lang->line('add'), $this->lang->line('site'); ?>
-            </button>
-          </div>
-          
-    </div>
- 
+
+</fieldset>
+
+
+<div class="control-group">
+	<!-- Button -->
+	<div class="controls">
+		<button id='submit' class="btn btn-success">
+			<i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('submit'); ?></button>
 	</div>
-    </fieldset>
-  
-   
-    <div class="control-group">
-          <!-- Button -->
-          <div class="controls">
-            <button id='submit' class="btn btn-success"><i class="icon-white icon-hand-right"></i> <?php echo $this->lang->line('submit'); ?></button>
-          </div>
-        </div>
-	</div>
+</div>
+</div>
 
 </form>
 <script>  
-       var avail_question_index = [];
+      
        var avail_location_index = [];
-       var avail_ending_index = [];
-       function addAEnding()
-       {
-         var index  = $('div.endingRow').length;
-        
-             if(avail_ending_index.length)
-             {
-           	  index = avail_ending_index[0];
-           	  avail_ending_index.splice(0, 1);
-             }
-         if(index < 10)
-         { 
-	          $("#endingTemplate").clone().removeClass('hidden').attr('id','endingContainer' +　index ).insertAfter("div.endingRow:last");
-	          $("div.endingRow:last").find('input').attr('name','ending' +　index).attr('id','ending' +　index );
-	          $('#endingContainer' +　index  + ' .btn-danger').click(function(){
-					var id = $(this).parents('.endingRow').attr('id');
-					var index = id.substring(15);
-					removeEnding(index);
-	             });
-         }
-       }
-      function removeEnding(index){
-    	  var conf = confirm("<?php echo  $this->lang->line('confirm_delete');?>");
-          if(!conf)
-              return false;
-   	   $('#endingContainer' +　index).fadeOut().remove();
-   	   avail_ending_index.push (index);
-      }
-       function addQuestion()
+       var avail_img_index = [];
+       
+       function addImage(loc_index)
         {
-          var index  = $('div.questionRow').length;
+          var index  = $('#locationContainer' + loc_index + ' div.imgRow').length + 1;
          
-              if(avail_question_index.length)
+              if(avail_img_index[loc_index] && avail_img_index[loc_index].length)
               {
-            	  index = avail_question_index[0];
-            	  avail_question_index.splice(0, 1);
+            	  index = avail_img_index[loc_index][0];
+            	  avail_img_index[loc_index].splice(0, 1);
               }
+              //alert(loc_index + '_' + index);
           if(index < 10)
-          { 
-	          $("#questionTemplate").clone().removeClass('hidden').attr('id','questionContainer' +　index ).insertAfter("div.questionRow:last");
-	          $("div.questionRow:last").find('input').attr('name','question' +　index).attr('id','question' +　index );
-	          $('#questionContainer' +　index  + ' .btn-danger').click(function(){
-					var id = $(this).parents('.questionRow').attr('id');
-					var index = id.substring(17);
-					removeQuestion(index);
+          {
+              //alert(loc_index + '_' + index);
+        	  $("#imgTemplate").clone().removeClass('hidden').attr('id','thumbnailContainer' + loc_index + '_' +　index ).insertBefore('#locationContainer' + loc_index + ' .addImg');
+	          $('#locationContainer' + loc_index + ' div.imgRow:last').find('input').attr('name','thumbnail' + loc_index + '_' +　index).attr('id','thumbnail' + loc_index + '_' +　index );
+	          $('#thumbnailContainer'+ loc_index + '_' +　index  + ' .btn-danger').click(function(){
+					var id = $(this).parents('.imgRow').attr('id');
+					var indexStr = id.substring(18);
+					var indexArr = indexStr.split('_');
+					removeImage(indexArr[0],indexArr[1]);
 	             });
           }
         }
-       function removeQuestion(index){
-    	   var conf = confirm("<?php echo  $this->lang->line('confirm_delete');?>");
-           if(!conf)
-               return false;
-    	   $('#questionContainer' +　index).fadeOut().remove();
-    	   avail_question_index.push (index);
+       function removeImage(loc,index){
+           //alert(loc + '_' + index);
+    	   $('#thumbnailContainer' + loc + '_' +　index).fadeOut().remove();
+    	   if(!avail_img_index[loc] || !avail_img_index[loc].length){
+    		   avail_img_index[loc] = [];
+    	   }
+    	   avail_img_index[loc].push (index);
        }
+      
 
        function addLocation()
        {
