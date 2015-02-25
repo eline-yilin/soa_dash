@@ -45,27 +45,24 @@ echo form_open_multipart ( $this->config->item ( 'base_url' ) . $router . '/' . 
 
 			<!-- greeting-->
 			<div class="controls hidden locationRow" id="locationTemplate">
-				<div class='panel panel-warning'>
+				<div class='panel panel-primary'>
 					<div class='panel-body'>
-						<input type="text" name="location" class="input-xlarge"
-							'>
-						<button type='button' class="btn btn-danger btn-mini">
-							<i class="icon-white icon-remove"></i>
-	            				<?php echo $this->lang->line('delete') . $this->lang->line('site') ; ?> 
-           				</button>
+					    <label class="control-label"><?php echo $this->lang->line("site_name"); ?></label>
+					    <div class='controls'>
+							<input type="text" name="location" class="input-xlarge">
+						
+							<button type='button' class="btn btn-danger btn-mini delete-location">
+								<i class="icon-white icon-remove"></i>
+		            				<?php echo $this->lang->line('delete') . $this->lang->line('site') ; ?> 
+	           				</button>
+	           			</div>
            				<div class='panel panel-warning'>
 								<div class='panel-body'>
 									<div class="row control-group">
 										<h4><?php echo $this->lang->line('upload'),$this->lang->line('file'); ?></h4>
 										<div class="control-group   ">
 											<!-- img-->
-											<div class="controls imgRow" >
-												<input type="file" ,  class="input-xlarge">
-												<button type='button' class="btn btn-danger btn-mini">
-													<i class="icon-white icon-remove"></i>
-							            <?php echo $this->lang->line('delete') . $this->lang->line('file') ; ?> 
-							            </button>
-											</div>
+											
 											<!-- Button -->
 											<div class="controls">
 												<button type='button' class="addImg btn btn-success">
@@ -84,22 +81,26 @@ echo form_open_multipart ( $this->config->item ( 'base_url' ) . $router . '/' . 
 			</div>
 			<div class="controls hidden imgRow" id="imgTemplate">
 				<input type="file" ,  class="input-xlarge" id='thumbnail'>
-				<button type='button' class="btn btn-danger btn-mini">
+				<button type='button' class="btn btn-danger btn-mini delete-img">
 					<i class="icon-white icon-remove"></i>
           		 <?php echo $this->lang->line('delete') . $this->lang->line('file')  ; ?> </button>
 			</div>
 
 
 			<div class="controls locationRow" id='locationContainer1'>
-				<div class='panel panel-warning'>
+				<div class='panel panel-primary'>
 					<div class='panel-body'>
-						<input type="text" name="location1" class="input-xlarge"
-							id='location1'>
-						<button type='button' class="btn btn-danger btn-mini"
-							onclick='removeLocation(1);'>
-							<i class="icon-white icon-remove"></i>
-	            				<?php echo $this->lang->line('delete') . $this->lang->line('site') ; ?> 
-           				</button>
+							<label class="control-label"><?php echo $this->lang->line("site_name"); ?></label>
+						    <div class='controls'>
+								<input type="text" name="location1" class="input-xlarge"
+									id='location1'>
+							
+								<button type='button' class="btn btn-danger btn-mini delete-location"
+									onclick='removeLocation(1);'>
+									<i class="icon-white icon-remove"></i>
+			            				<?php echo $this->lang->line('delete') . $this->lang->line('site') ; ?> 
+		           				</button>
+		           			</div>
            				<div class='panel panel-warning'>
 								<div class='panel-body'>
 									<div class="row control-group">
@@ -109,7 +110,7 @@ echo form_open_multipart ( $this->config->item ( 'base_url' ) . $router . '/' . 
 											<div class="controls imgRow" id='thumbnailContainer1_1'>
 												<input type="file" , name="thumbnail1_1" class="input-xlarge"
 													id='thumbnail1_1'>
-												<button type='button' class="btn btn-danger btn-mini"
+												<button type='button' class="btn btn-danger btn-mini delete-img"
 													onclick='removeImage(1,1);'>
 													<i class="icon-white icon-remove"></i>
 							            <?php echo $this->lang->line('delete') . $this->lang->line('file') ; ?> 
@@ -177,7 +178,7 @@ echo form_open_multipart ( $this->config->item ( 'base_url' ) . $router . '/' . 
               //alert(loc_index + '_' + index);
         	  $("#imgTemplate").clone().removeClass('hidden').attr('id','thumbnailContainer' + loc_index + '_' +　index ).insertBefore('#locationContainer' + loc_index + ' .addImg');
 	          $('#locationContainer' + loc_index + ' div.imgRow:last').find('input').attr('name','thumbnail' + loc_index + '_' +　index).attr('id','thumbnail' + loc_index + '_' +　index );
-	          $('#thumbnailContainer'+ loc_index + '_' +　index  + ' .btn-danger').click(function(){
+	          $('#thumbnailContainer'+ loc_index + '_' +　index  + ' .btn-danger.delete-img').click(function(){
 					var id = $(this).parents('.imgRow').attr('id');
 					var indexStr = id.substring(18);
 					var indexArr = indexStr.split('_');
@@ -208,7 +209,13 @@ echo form_open_multipart ( $this->config->item ( 'base_url' ) . $router . '/' . 
          { 
 	          $("#locationTemplate").clone().removeClass('hidden').attr('id','locationContainer' +　index ).insertAfter("div.locationRow:last");
 	          $("div.locationRow:last").find('input').attr('name','location' +　index).attr('id','location' +　index );
-	          $('#locationContainer' +　index  + ' .btn-danger').click(function(){
+	          addImage(index);
+	          $('#locationContainer' +　index  + ' .addImg').click(function(){
+					var id = $(this).parents('.locationRow').attr('id');
+					var index = id.substring(17);
+					addImage(index);
+	             });
+	          $('#locationContainer' +　index  + ' .btn-danger.delete-location').click(function(){
 					var id = $(this).parents('.locationRow').attr('id');
 					var index = id.substring(17);
 					removeLocation(index);
