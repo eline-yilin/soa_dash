@@ -362,7 +362,7 @@ $config['proxy_ips'] = '';
 /* Location: ./application/config/config.php */
 $config['base_theme_url']	= 'http://120.24.73.33:8080/soa_dash/public/themes/';
 $config['api_url']	= 'http://120.24.73.33:8080/soa_api/index.php/api/';
-$config['cdn_path']	=  '/var/www/soa_api/public/img/upload/';//'F:/workspace/ci/public/img/upload/';
+$config['cdn_path']	=  '/var/www/soa_api/public/upload/';//'F:/workspace/ci/public/img/upload/';
 $config['api_username']	=  'dash_super';
 $config['api_password']	=  'ama:;5IyC9V]VlK';
 $config['cdn_url'] = 'http://120.24.73.33:8080/soa_api/public/';
