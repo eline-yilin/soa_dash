@@ -21,20 +21,16 @@ class airfreight extends My_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function index() {
-		$router = $this->data['router'];
+		$router = $this->data ['router'];
 		$request_url = $router . '/list/format/json';
 		
 		$resp = my_api_request ( $request_url, $method = 'get', $param = array () );
+		
 		$resp = json_decode ( $resp, true );
 		if (isset ( $resp ['error'] )) {
 			$this->data ['error'] = $resp ['error'];
 		} else {
-			foreach ( $resp as $item ) {
-				if (isset ( $item ['img'] ) && $item ['img']) {
-					$imgs = explode ( $item ['img'], ',' );
-					$item ['img'] = $imgs [0];
-				}
-			}
+			
 			$this->data ['items'] = $resp;
 		}
 		
@@ -43,7 +39,7 @@ class airfreight extends My_Controller {
 		$this->load->view ( 'templates/footer', $this->data );
 	}
 	public function create() {
-		$router = $this->data['router'];
+		$router = $this->data ['router'];
 		$this->data ['title'] = $this->lang->line ( 'create' ) . $this->lang->line ( $router );
 		
 		$this->load->helper ( 'form' );
@@ -51,61 +47,73 @@ class airfreight extends My_Controller {
 		
 		$validation_rules = array (
 				array (
-						'field' => 'productname',
-						'label' => 'productname',
+						'field' => 'product_type_name',
+						'label' => 'product_type_name',
 						'rules' => 'required' 
-				),
-	
+				) 
 		);
 		
-		//$this->form_validation->set_rules ( $validation_rules );
+		$this->form_validation->set_rules ( $validation_rules );
 		
-		//$this->load->view ( 'templates/header', $this->data );
+		// $this->load->view ( 'templates/header', $this->data );
 		// invalid or first load, load page normally
 		if ($this->form_validation->run () === FALSE) {
 		}  // process upload
-else {
+		else {
 			// product entity
 			$request = array (
-					
+					'name' => $this->input->post ( 'product_type_name' ) 
 			);
 			// ''=>$this->input->post(''),
 			
-			
 			// init upload lib
 			$upload_config ['upload_path'] = $this->config->item ( 'cdn_path' ) . 'resource/';
-			//$upload_config ['allowed_types'] = 'gif|jpg|png|jpeg';
+			$upload_config ['allowed_types'] = '*';
 			$upload_config ['remove_spaces'] = TRUE;
-			//$upload_config ['max_size'] = '1000';
-			//$upload_config ['max_width'] = '1024';
-			//$upload_config ['max_height'] = '768';
+			$upload_config ['overwrite'] = TRUE;
+			// $upload_config ['max_width'] = '1024';
+			// $upload_config ['max_height'] = '768';
 			
-			$this->load->library ( 'upload', $upload_config );
 			$errors = array ();
-			$images = array ();
+			$locations = array ();
 			// read imgs
-			$now = date("Y_m_d_H-i-s");
+			$now = date ( "Y_m_d_H-i-s" );
 			for($i = 1; $i <= 10; $i ++) {
 				
-				if (isset ( $_FILES ['thumbnail' . $i] )) {
-					$upload_name = $_FILES ['thumbnail' . $i]['name'] . $now;
-					$img_url = $this->uploadImg ( $upload_name, $errors );
-					$images [] = $img_url;
-				} else {
-					continue; // break;
+				if (isset ( $_POST ['location' . $i] )) {
+					$item = array ();
+					$images = array ();
+					$item ['name'] = $_POST ['location' . $i];
+					for($j = 1; $j <= 10; $j ++) {
+						if (isset ( $_FILES ['thumbnail' . $i . '_' . $j] )) {
+							$uploaded = $_FILES ['thumbnail' . $i . '_' . $j] ['name'];
+							$filename = pathinfo ( $uploaded, PATHINFO_FILENAME );
+							$ext = pathinfo ( $uploaded, PATHINFO_EXTENSION );
+							$upload_name = $filename . '_' . $now . '.' . $ext;
+							$upload_config ['file_name'] = $upload_name;
+							$img_url = $this->uploadImg ( 'thumbnail' . $i . '_' . $j, $upload_config, $errors );
+							$images [] = $img_url;
+						} else {
+							continue; // break;
+						}
+					}
+					$item ['files'] = implode ( ',', $images );
+					$locations [] = $item;
 				}
 			}
 			
 			if (count ( $errors ) > 0) {
+				var_dump ( $errors );
+				die ();
 				$this->data ['errors'] = $errors;
 			} else {
-				$request ['img'] = implode ( ',', $images );
 				// call create api
+				$request ['sites'] = $locations;
 				
 				$request_url = $router . '/detail/format/json';
+				$resp = my_api_request ( $request_url, $method = 'post', $request );
 				
-				//$resp = my_api_request ( $request_url, $method = 'post', $request );
-				//$this->data ['resp'] = json_decode ( $resp, true );
+				$this->data ['resp'] = json_decode ( $resp, true );
 			}
 		}
 		$this->load->view ( 'templates/header' );
@@ -113,15 +121,16 @@ else {
 		$this->load->view ( 'templates/footer' );
 	}
 	public function update($id_name, $id_val) {
-		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( 'product' );
+		$router = $this->data ['router'];
+		$this->data ['title'] = $this->lang->line ( 'edit' ) . $this->lang->line ( $router );
 		
 		$this->load->helper ( 'form' );
 		$this->load->library ( 'form_validation' );
 		
-		$request_url = 'product/detail/id/' . $id_val . '/format/json';
+		$request_url = $router . '/detail/id/' . $id_val . '/format/json';
 		
 		$detail = my_api_request ( $request_url, $method = 'get', $param = array () );
-		
+		;
 		// $this->data = array();
 		// $this->data = my_api_request
 		$this->data ['detail'] = json_decode ( $detail, true );
@@ -150,8 +159,8 @@ else {
 		$this->load->view ( 'templates/header', $this->data );
 		// invalid or first load, load page normally
 		if ($this->form_validation->run () === FALSE) {
-		} 		// process upload
-		else {
+		}  // process upload
+else {
 			// product entity
 			$request = array (
 					'id' => $id_val,
@@ -160,9 +169,8 @@ else {
 					'price' => $this->input->post ( 'price' ),
 					'description' => $this->input->post ( 'description' ),
 					'entity_id' => $this->input->post ( 'entity' ) 
-			)
+			);
 			// ''=>$this->input->post(''),
-			;
 			
 			// init upload lib
 			$upload_config ['upload_path'] = $this->config->item ( 'cdn_path' ) . 'product/';
@@ -199,8 +207,6 @@ else {
 				
 				$this->data ['resp'] = json_decode ( $resp, true );
 			}
-			var_dump ( $request );
-			die ();
 		}
 		
 		$this->load->view ( "pages/" . $this->data ['router'] . "/" . $this->data ['action'], $this->data );

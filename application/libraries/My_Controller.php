@@ -26,8 +26,11 @@ abstract class My_Controller extends CI_Controller
 
     protected $data = array();
 
-    protected function uploadImg($input_name, &$error){
-    	if ( ! $this->upload->do_upload($input_name))
+    protected function uploadImg($filename, $config, &$error){
+    	$this->load->library ( 'upload', $config );
+    	$this->upload->initialize($config);
+    	//echo $filename , ' | ' , $config['file_name'] ;
+    	if ( ! $this->upload->do_upload($filename))
     	{
     		$error = $this->upload->display_errors();
     		return  false;

@@ -2,6 +2,21 @@
 
 if ( ! function_exists('my_api_request'))
 {
+	function http_build_query_for_curl( $arrays, &$new = array(), $prefix = null ) {
+	
+		if ( is_object( $arrays ) ) {
+			$arrays = get_object_vars( $arrays );
+		}
+	
+		foreach ( $arrays AS $key => $value ) {
+			$k = isset( $prefix ) ? $prefix . '[' . $key . ']' : $key;
+			if ( is_array( $value ) OR is_object( $value )  ) {
+				http_build_query_for_curl( $value, $new, $k );
+			} else {
+				$new[$k] = $value;
+			}
+		}
+	}
     function my_api_request($url , $method = 'get', $param = array())
     {
     	$CI =& get_instance();
@@ -39,12 +54,15 @@ if ( ! function_exists('my_api_request'))
     			}
     			//var_dump($param);die;
     			curl_setopt($ch, CURLOPT_POST, 1);
-    			curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($param));
+    			http_build_query_for_curl( $param, $post );
+    			curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+    			//curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($param));
     			break;
     		case 'put':
     			$query = http_build_query($param);
     			
     			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
+    			
     			curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($param));
     			break;
     		case 'delete':

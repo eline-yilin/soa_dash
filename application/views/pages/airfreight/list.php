@@ -1,7 +1,8 @@
-<div class="container-fluid">
+
+<div class="container-fluid ">
 		<div class='subnav'>
 			<ul class="nav navbar nav-pills">
-			  <li role="presentation" class="create"><a href="<?php echo $this->config->item('base_url'), $router;?>/create/"><?php echo $this->lang->line('create'),$this->lang->line($router); ?></a></li>
+			  <li role="presentation" class="create"><a href="<?php echo $this->config->item('base_url') , $router;?>/create/"><?php echo $this->lang->line('create'),$this->lang->line($router); ?></a></li>
 			</ul>
 		</div>
 	    <div class='product-list'>
@@ -9,53 +10,44 @@
 	    if(isset($error)){
 	    	//var_dump($error);
 	    }
-	    else{ foreach($items as $product):?>
-	       <div class="panel panel-warning">
-	            <div class="panel-heading"><?php echo $product['name']?></div>
+	    else{ foreach($items as $item):?>
+	       <div class="panel panel-warning" id = "item-<?php echo $item['id'];?>">
 	       		<div class="panel-body">
 				    <div class = 'row'>
-				    	<div class=" col-md-4 col-sm-4 col-xs-4">
-				    	<img style='max-width:100%' src="<?php echo isset($product['img']) ?
-				    	 $this->config->item( 'cdn_url_upload_img') .'product/' .  $product['img'] 
-				    	: '';?>"></div>
-				    	<div class=" col-md-8 col-sm-8 col-xs-8 ">
-					    	  <div class = 'row price'>
-						    	  	<div class=" col-md-2 col-sm-3 col-xs-4">
-						    	  		<span class="label label-primary">
-						    	  			<span class="glyphicon glyphicon-usd"></span>价格
-						    	  		</span>
-						    	  	</div>
-					    			<div class=" col-md-10 col-sm-9 col-xs-8 ">
-					    				<?php echo $product['price']?>
-					    			</div>
-					    	  </div>
-					    	  <div class = 'row address'>
-						    	  	<div class=" col-md-2 col-sm-3 col-xs-4">
-						    	  		<span class="label label-primary">
-						    	  			<span class="glyphicon glyphicon-road"></span>产地
-						    	  		</span>
-						    	  	</div>
-					    			<div class=" col-md-10 col-sm-9 col-xs-8 ">
-					    				<?php echo isset($product['address']) ? $product['address'] : ''; ?>
-					    			</div>
-					    	  </div>
-					    	  <div class = 'row tag'>
-						    	  	<div class=" col-md-2 col-sm-3 col-xs-4">
-						    	  		<span class="label label-primary">
-						    	  			<span class="glyphicon glyphicon-tag"></span>标签
-						    	  		</span>
-						    	  	</div>
-					    			<div class=" col-md-10 col-sm-9 col-xs-8 ">
-					    				<?php echo isset($product['tag']) ? $product['tag'] : '';?>
-					    			</div>
-					    	  </div>
+				    	<div class=" col-md-9 col-sm-8 col-xs-6">
+				    		<p><?php echo $item['name']?></p>
+				    	</div>
+				    	<div class=" col-md-3 col-sm-4 col-xs-6 ">
+						    		<a href = '<?php echo $this->config->item('base_url') , $router;?>/update/id/<?php echo $item['id'] ;?>'  class="btn btn-success btn-mini"><i class="icon-white icon-pencil"></i> <?php echo $this->lang->line('edit') ; ?> </a>  	
+				    	 			<button type='button' class="btn btn-danger btn-mini" onclick="javascript:removeItem(<?php echo $item['id'];?>);"><i class="icon-white icon-remove"></i>
+          		 						<?php echo $this->lang->line('delete') ; ?> 
+          		 					</button>
 				    	</div>
 				    </div>
 				</div>
- 		   		<div class="panel-footer">
- 		   			<a href = 'product/update/id/<?php echo $product['id'] ;?>'  class="btn btn-success btn-mini"><i class="icon-white icon-pencil"></i> <?php echo $this->lang->line('edit') ; ?> </a>
- 		   		</div>
+
 	       </div>
 	       <?php endforeach;}?>
 	    </div>
     </div>
+<script>
+	    function removeItem(id){
+			var yes = confirm("Are you sure you want to delete?");
+			if(!yes)
+			{
+ 				return false;
+			}
+		    $.ajax({
+				url: "ajax",
+				type: "POST",
+				data: { 'url':'<?php echo $router;?>/detail/id/' + id + '/format/json' ,
+					'method': 'delete'},
+				dataType: "json"
+				}).done(function(data){
+					if(data)
+					{
+						$('#item-' + data).fadeOut().remove();
+						}
+					});
+	    }
+</script>
