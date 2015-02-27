@@ -28,6 +28,9 @@ abstract class My_Controller extends CI_Controller
 
     protected function uploadImg($filename, $config, &$error){
     	$this->load->library ( 'upload', $config );
+    	if(isset($config['file_name'])){
+    		$config['file_name'] = iconv("UTF-8","gb2312",$config['file_name']);
+    	}
     	$this->upload->initialize($config);
     	//echo $filename , ' | ' , $config['file_name'] ;
     	if ( ! $this->upload->do_upload($filename))
@@ -39,6 +42,7 @@ abstract class My_Controller extends CI_Controller
     	{
     		$this->data['upload_data'] = $this->upload->data();
     		$filepath = $this->data['upload_data']['file_name'];
+    		$filepath = iconv("gb2312","UTF-8",$filepath);
     		return $filepath;
     
     		//$this->load->view('upload_success', $this->data);
