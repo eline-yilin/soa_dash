@@ -109,7 +109,7 @@ echo form_open_multipart ( '../' . uri_string(), $attributes );
 											<!-- img-->
 											<?php foreach($site['files'] as $j => $file): $j = $j + 1;?>
 											<div class="controls imgRow" id='thumbnailContainer<?php echo $index , '_' , $j;?>'>
-												<input disabled readonly type="text" , name="thumbnail<?php echo $index , '_' , $j;?>" class="input-xlarge"
+												<input  readonly type="text" , name="thumbnail<?php echo $index , '_' , $j;?>" class="input-xlarge my-disabled"
 													id='thumbnail<?php echo $index , '_' , $j;?>' value="<?php echo $file;?>">
 												<button type='button' class="btn btn-danger btn-mini delete-img"
 													onclick='removeImage(<?php echo $index;?>,<?php echo $j;?>);'>

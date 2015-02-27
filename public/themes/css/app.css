@@ -109,3 +109,6 @@ fieldset{margin-bottom:10px;}
 .imgRow input[type=file] {
  display: inline-block; 
 }
+.my-disabled{
+	background:#ccc;
+}

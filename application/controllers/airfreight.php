@@ -137,21 +137,11 @@ class airfreight extends My_Controller {
 		
 		$validation_rules = array (
 				array (
-						'field' => 'productname',
-						'label' => 'productname',
+						'field' => 'product_type_name',
+						'label' => 'name',
 						'rules' => 'required' 
 				),
-				/* array(
-				 'field'   => 'password',
-						'label'   => 'Password',
-						'rules'   => 'required'
-				),
-		array(
-				'field'   => 'passconf',
-				'label'   => 'Password Confirmation',
-				'rules'   => 'required'
-		), */
-	
+				
 		);
 		
 		$this->form_validation->set_rules ( $validation_rules );
@@ -160,38 +150,50 @@ class airfreight extends My_Controller {
 		// invalid or first load, load page normally
 		if ($this->form_validation->run () === FALSE) {
 		}  // process upload
-else {
-			// product entity
-			$request = array (
-					'id' => $id_val,
-					'name' => $this->input->post ( 'productname' ),
-					'category_id' => $this->input->post ( 'category' ),
-					'price' => $this->input->post ( 'price' ),
-					'description' => $this->input->post ( 'description' ),
-					'entity_id' => $this->input->post ( 'entity' ) 
+		else {
+					// product entity
+		$request = array (
+					'name' => $this->input->post ( 'product_type_name' ) ,
+					'id'=>$id_val
 			);
 			// ''=>$this->input->post(''),
 			
 			// init upload lib
-			$upload_config ['upload_path'] = $this->config->item ( 'cdn_path' ) . 'product/';
-			$upload_config ['allowed_types'] = 'gif|jpg|png|jpeg';
+			$upload_config ['upload_path'] = $this->config->item ( 'cdn_path' ) . 'resource/';
+			$upload_config ['allowed_types'] = '*';
 			$upload_config ['remove_spaces'] = TRUE;
-			$upload_config ['max_size'] = '1000';
-			$upload_config ['max_width'] = '1024';
-			$upload_config ['max_height'] = '768';
+			$upload_config ['overwrite'] = TRUE;
+			// $upload_config ['max_width'] = '1024';
+			// $upload_config ['max_height'] = '768';
 			
-			$this->load->library ( 'upload', $upload_config );
 			$errors = array ();
-			$images = array ();
+			$locations = array ();
 			// read imgs
-			for($i = 1; $i < 0; $i ++) {
+			$now = date ( "Y_m_d_H-i-s" );
+			for($i = 1; $i <= 10; $i ++) {
 				
-				if (isset ( $_FILES ['thumbnail' . $i] )) {
-					$upload_name = 'thumbnail' . $i;
-					$img_url = $this->uploadImg ( $upload_name, $errors );
-					$images [] = $img_url;
-				} else {
-					continue; // break;
+				if (isset ( $_POST ['location' . $i] )) {
+					$item = array ();
+					$images = array ();
+					$item ['name'] = $_POST ['location' . $i];
+					for($j = 1; $j <= 10; $j ++) {
+						if (isset ( $_FILES ['thumbnail' . $i . '_' . $j] )) {
+							$uploaded = $_FILES ['thumbnail' . $i . '_' . $j] ['name'];
+							$filename = pathinfo ( $uploaded, PATHINFO_FILENAME );
+							$ext = pathinfo ( $uploaded, PATHINFO_EXTENSION );
+							$upload_name = $filename . '_' . $now . '.' . $ext;
+							$upload_config ['file_name'] = $upload_name;
+							$img_url = $this->uploadImg ( 'thumbnail' . $i . '_' . $j, $upload_config, $errors );
+							$images [] = $img_url;
+						} 
+						elseif (isset ( $_POST ['thumbnail' . $i . '_' . $j] )) {
+								$images [] = $_POST ['thumbnail' . $i . '_' . $j];
+						}  else {
+							continue; // break;
+						}
+					}
+					$item ['files'] = implode ( ',', $images );
+					$locations [] = $item;
 				}
 			}
 			
@@ -199,17 +201,16 @@ else {
 				$this->data ['errors'] = $errors;
 			} else {
 				
-				$request ['img'] = implode ( ',', $images );
+				$request ['sites'] = $locations;
 				// call create api
-				$request_url = 'product/detail/id/' . $id_val . '/format/json';
-				
+				$request_url = $router . '/detail/id/' . $id_val . '/format/json';
 				$resp = my_api_request ( $request_url, $method = 'put', $request );
 				
 				$this->data ['resp'] = json_decode ( $resp, true );
 			}
 		}
 		
-		$this->load->view ( "pages/" . $this->data ['router'] . "/" . $this->data ['action'], $this->data );
+		$this->load->view ( "pages/" . $router  . "/" . $this->data ['action'], $this->data );
 		$this->load->view ( 'templates/footer' );
 	}
 }
