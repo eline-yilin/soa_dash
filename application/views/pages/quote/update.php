@@ -27,7 +27,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
        
     <div class="control-group">
           <!-- Text input-->
-          <label class="control-label" for="agent"><?php echo $this->lang->line("agent"); ?></label>
+          <label class="control-label" for="agent"><?php echo $this->lang->line("agent_title"); ?></label>
           <div class="controls">
             <input type="text"  class="input-xlarge required" name='agent' id='agent'  value="<?php echo $detail['agent']?>">
           </div>
@@ -40,7 +40,6 @@ echo form_open_multipart('../' . uri_string(), $attributes);
       <!-- inquery-->
 	<fieldset>
       <div id="legend" >
-        <legend class=""><?php echo $this->lang->line('add'), $this->lang->line('client') ; ?></legend>
     <div class="control-group   {?sizewarning} error {/sizewarning}">
           
           <!-- question-->
@@ -49,7 +48,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
 		          <div class="controls">
 		            <input type="text"  class="input-xlarge required" name='client' id='client'  value="">
 		          </div>
-          		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
+          		<label class="control-label" for="client"><?php echo $this->lang->line('client_content') ; ?></label>
 		          <div class="controls">
 		            <textarea  rows="5"  class="hand input-xlarge required" name='client_content' id='client_content' readonly placeholder="click to edit" onclick="javascript: editContent(this)"></textarea>
 		          </div>
@@ -62,7 +61,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
 		          <div class="controls">
 		            <input type="text"  class="input-xlarge required" name='client<?php echo $index;?>' id='client<?php echo $index;?>'  value="<?php echo $client['name'];?>">
 		          </div>
-          		<label class="control-label" for="client"><?php echo $this->lang->line('client'),$this->lang->line('content') ; ?></label>
+          		<label class="control-label" for="client"><?php echo $this->lang->line('client_content') ; ?></label>
 		          <div class="controls">
 		            <textarea   rows="<?php echo $line_num;?>" class="hand input-xlarge required" name='client_content<?php echo $index;?>' id='client_content<?php echo $index;?>' readonly placeholder="click to edit" onclick="javascript: editContent(this)"><?php echo $client['content'];?></textarea>
 		          </div>

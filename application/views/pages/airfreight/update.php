@@ -40,7 +40,7 @@ echo form_open_multipart ( '../' . uri_string(), $attributes );
 <!-- location-->
 <fieldset>
 	<div id="legend">
-		<legend class=""><?php echo $this->lang->line('add'),$this->lang->line('site'); ?></legend>
+		
 		<div class="control-group">
 
 			<!-- greeting-->

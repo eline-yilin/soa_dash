@@ -42,6 +42,7 @@ class inquiry extends My_Controller {
 		$this->load->view ( 'templates/footer', $this->data );
 	}
 	public function create() {
+		$router = $this->data['router'];
 		$this->data ['title'] = $this->lang->line ( 'createinquiry' );
 		
 		$this->load->helper ( 'form' );
@@ -124,14 +125,14 @@ else {
 				$request ['endings'] = implode('###', $endings);
 				// call create api
 				
-				$request_url = 'inquiry/detail/format/json';
+				$request_url = $router . '/detail/format/json';
 
 				$resp = my_api_request ( $request_url, $method = 'post', $request );
 				//var_dump($resp);die;
 				$this->data ['resp'] = json_decode ( $resp, true );
 			}
 		}
-		$this->load->view ( "pages/" . $this->data ['router'] . "/" . $this->data ['action'], $this->data );
+		$this->load->view ( "pages/" . $router . "/" . $this->data ['action'], $this->data );
 		$this->load->view ( 'templates/footer' );
 	}
 	public function update($id_name, $id_val) {

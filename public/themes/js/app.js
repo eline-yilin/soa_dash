@@ -3,13 +3,44 @@ var current_page = default_page = 'bussiness';
 function move(ele,selector,dir){
     var target;
     var me = $(ele).parents(selector);
-   
     if(dir == 'up')
     {
  	   target = me.prev(selector + ':visible').find('input');
         }
     else{
  	   target = me.next(selector + ':visible').find('input');
+    }
+    if(!target.length)
+    {  
+        return;
+    }
+   var target_val = target.val();
+   var my_val = me.find('input').val();
+   me.find('input').val(target_val);
+   target.val(my_val);
+}
+
+function moveItem(ele,selector,dir,callback){
+    var target;
+    var me = $(ele).parents(selector);
+    var idStr = me.attr('id');
+    var idStrArr = idStr.split('-');
+    var id = idStrArr[1];
+    if(dir == 'up')
+    {
+ 	   target = me.prev(selector + ':visible');
+ 	   if( target.length ){
+ 		   me.insertBefore(target);
+ 		   callback(id, 'add');
+ 	   }
+
+    }
+    else{
+ 	   target = me.next(selector + ':visible');
+ 	  if( target.length ){
+ 		  me.insertAfter(target);
+ 		 callback(id, 'reduce');
+ 	  }
     }
     if(!target.length)
     {  
