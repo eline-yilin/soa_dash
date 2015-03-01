@@ -18,7 +18,7 @@
 				    		<p><?php echo $item['name']?></p>
 				    	</div>
 				    	<div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
-						    		<a href = 'inquiry/update/id/<?php echo $item['id'] ;?>'  class="btn btn-success btn-mini"><i class="icon-white icon-pencil"></i> <?php echo $this->lang->line('edit') ; ?> </a>  	
+						    		<a href = '<?php echo $this->config->item('base_url'), $router;?>/update/id/<?php echo $item['id'] ;?>'  class="btn btn-success btn-mini"><i class="icon-white icon-pencil"></i> <?php echo $this->lang->line('edit') ; ?> </a>  	
 				    	 			<button type='button' class="btn btn-danger btn-mini" onclick="javascript:removeItem(<?php echo $item['id'];?>);"><i class="icon-white icon-remove"></i>
           		 						<?php echo $this->lang->line('delete') ; ?> 
           		 					</button>
