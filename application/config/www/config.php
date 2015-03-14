@@ -372,8 +372,8 @@ $config['nav_arr'] = array(
 		"template" => array(
 				'text'=>"模板管理"
 		),
-		"price" => array(
-				'text'=>"报价管理"
+		"news" => array(
+				'text'=>"新闻管理"
 		),
 
 		
