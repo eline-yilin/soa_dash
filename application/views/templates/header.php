@@ -56,6 +56,9 @@
            		</li>
            <?php endif;?>
            <?php endforeach;?>
+           		<li class='nav-item' id='nav-item-front'>
+           			<a href="<?php echo $this->config->item( 'base_url') , '../../soa_front/' ;?>">前台</a>
+           		</li>
            		<li role="presentation" class="dropdown operation pull-right" >
            		<?php if(isset($user) && $user) :?>
 				    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">
