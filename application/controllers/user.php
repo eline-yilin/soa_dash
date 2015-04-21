@@ -223,11 +223,15 @@ class user extends My_Controller {
 					
 				}
 				else{
-					$this->data['resp'] = $resp;
-					$this->session->set_userdata('dash_user', $resp);
-					$previous_url = $this->session->userdata('dash_current_url');
-					redirect( $this->config->item( 'base_url') . $previous_url, 'refresh');
-					
+					if($resp['type'] != 'back' && $resp['type'] != 'all'){
+						$this->data['error'] = '没有合适权限';
+					}
+					else{
+						$this->data['resp'] = $resp;
+						$this->session->set_userdata('dash_user', $resp);
+						$previous_url = $this->session->userdata('dash_current_url');
+						redirect( $this->config->item( 'base_url') . $previous_url, 'refresh');
+					}
 				}
 
 
