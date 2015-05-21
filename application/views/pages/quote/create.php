@@ -95,7 +95,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 </form>
 <script>  
        var avail_question_index = [];
-
+       var max_index_length = 10;
        function editContent(ele){
     	   var id = $(ele).parents('.questionRow').attr('id');
 			var index = id.substring(17);
@@ -124,7 +124,8 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
             	  index = avail_question_index[0];
             	  avail_question_index.splice(0, 1);
               }
-          if(index < 10)
+          
+          if(index < max_index_length)
           { 
 	          $("#questionTemplate").clone().removeClass('hidden').attr('id','questionContainer' +　index ).insertAfter("div.questionRow:last");
 	          $("div.questionRow:last").find('input#client').attr('name','client' +　index).attr('id','client' +　index );

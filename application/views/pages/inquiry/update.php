@@ -165,7 +165,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
        var avail_question_index = [];
        var avail_greeting_index = [];
        var avail_ending_index = [];
-     
+       var max_index_length = 20;    
        function addAEnding()
        {
          var index  = $('div.endingRow').length;
@@ -175,7 +175,8 @@ echo form_open_multipart('../' . uri_string(), $attributes);
            	  index = avail_ending_index[0];
            	  avail_ending_index.splice(0, 1);
              }
-         if(index < 10)
+       
+         if(index < max_index_length)
          { 
 	          $("#endingTemplate").clone().removeClass('hidden').attr('id','endingContainer' +　index ).insertAfter("div.endingRow:last");
 	          $("div.endingRow:last").find('input').attr('name','ending' +　index).attr('id','ending' +　index );
@@ -202,7 +203,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
             	  index = avail_question_index[0];
             	  avail_question_index.splice(0, 1);
               }
-          if(index < 10)
+          if(index < max_index_length)
           { 
 	          $("#questionTemplate").clone().removeClass('hidden').attr('id','questionContainer' +　index ).insertAfter("div.questionRow:last");
 	          $("div.questionRow:last").find('input').attr('name','question' +　index).attr('id','question' +　index );
@@ -230,7 +231,7 @@ echo form_open_multipart('../' . uri_string(), $attributes);
            	  index = avail_greeting_index[0];
            	avail_greeting_index.splice(0, 1);
              }
-         if(index < 10)
+         if(index < max_index_length)
          { 
 	          $("#greetingTemplate").clone().removeClass('hidden').attr('id','greetingContainer' +　index ).insertAfter("div.greetingRow:last");
 	          $("div.greetingRow:last").find('input').attr('name','greeting' +　index).attr('id','greeting' +　index );
