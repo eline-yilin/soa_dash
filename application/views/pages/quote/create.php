@@ -95,7 +95,7 @@ echo form_open_multipart($this->config->item('base_url') .'quote/create', $attri
 </form>
 <script>  
        var avail_question_index = [];
-       var max_index_length = 10;
+       var max_index_length = 20;
        function editContent(ele){
     	   var id = $(ele).parents('.questionRow').attr('id');
 			var index = id.substring(17);

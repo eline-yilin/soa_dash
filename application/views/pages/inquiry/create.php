@@ -158,6 +158,7 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
        var avail_question_index = [];
        var avail_greeting_index = [];
        var avail_ending_index = [];
+       var max_index_length = 20;
        function addAEnding()
        {
          var index  = $('div.endingRow').length;
@@ -167,7 +168,7 @@ echo form_open_multipart($this->config->item('base_url') .'inquiry/create', $att
            	  index = avail_ending_index[0];
            	  avail_ending_index.splice(0, 1);
              }
-             var max_index_length = 20;
+          
          if(index < max_index_length)
          { 
 	          $("#endingTemplate").clone().removeClass('hidden').attr('id','endingContainer' +　index ).insertAfter("div.endingRow:last");
